@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>DetailPage</title>
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/bootstrap-4.0.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/customCSS/commonCSS.css">
+    <!--<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>-->
+    <link rel="stylesheet" href="../css/bootstrap-4.0.0/dist/css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/customCSS/commonCSS.css" type="text/css"/>
     <style type="text/css">
         #background{
             position: absolute;
@@ -90,6 +90,20 @@
         }
         .contentEffect{
             font-size: 14px;
+            margin-top: 0.5rem;
+        }
+        
+        
+        /*右端影片推荐列表样式*/
+        .numLabel{
+            font-weight: 700;
+            font-style: italic;
+        }
+        .recNameLabel,.recScoreLabel{
+            font-weight: 700;
+        }
+        .recScoreLabel{
+            color: #ffb400;
         }
     </style>
 </head>
@@ -215,14 +229,60 @@
                                 &nbsp;&nbsp;&nbsp;&nbsp;无论片中的陆鸣怎么选，小焦都会过上衣食无忧的生活，她要么会有一个家财万贯的亲爹，要么会有一个亿万资产的“干爹”（结合片中两人的实际年龄和事实情况，大概就是这个意思吧）
                             </div>
                         </div>
+                        <div class="row commentBlock">
+                            <div class="col-md-12">
+                                <div class="hr"></div>
+                            </div>
+                            <div class="col-md-1 ">
+                                <img class="rounded-circle" src="https://img.meituan.net/avatar/ed4f73b6ba1d2de36ff2a343bc14f43019943.jpg@100w_100h_1e_1c">
+                            </div>
+                            <div class="col-md-1 nameEffect downEffect">
+                                <h6>Jobs</h6>
+                            </div>
+                            <div class="col-md-2 dateEffect downEffect">
+                                <h6>2018-5-27</h6>
+                            </div>
+                            <div class="col-md-12 contentEffect">
+                                &nbsp;&nbsp;&nbsp;&nbsp;无论片中的陆鸣怎么选，小焦都会过上衣食无忧的生活，她要么会有一个家财万贯的亲爹，要么会有一个亿万资产的“干爹”（结合片中两人的实际年龄和事实情况，大概就是这个意思吧）
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
 
         </div>
+        <!--Top 10影片推荐-->
         <div class="col-md-3">
-
+            <div class="row introLabelBlock">
+                <div class="col-md-12">
+                    <h4 class="introLabel">Top 10 影片推荐</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1 numLabel">
+                    1.
+                </div>
+                <div class="col-md-8">
+                    <span class="recNameLabel">超时空同居</span>&nbsp;&nbsp;<span class="recScoreLabel">9.6</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1 numLabel">
+                    1.
+                </div>
+                <div class="col-md-8">
+                    <span class="recNameLabel">超时空同居</span>&nbsp;&nbsp;<span class="recScoreLabel">9.6</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1 numLabel">
+                    1.
+                </div>
+                <div class="col-md-8">
+                    <span class="recNameLabel">超时空同居</span>&nbsp;&nbsp;<span class="recScoreLabel">9.6</span>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -240,10 +300,9 @@
         <div class="col-md-9" id="projectInfoBlock">
             <h4>MovieRating <span >电影数据集成应用</span></h4>
             <h6>数据来源：</h6>
-            <span>猫眼电影：<a>http://maoyan.com/films</a></span>
-            <span>豆瓣电影：<a>https://movie.douban.com</a></span>
-            <span>时光网：<a>http://movie.mtime.com</a></span>
-
+            <span>猫眼电影：<a href="http://maoyan.com/films">http://maoyan.com/films</a></span>
+            <span>豆瓣电影：<a href="https://movie.douban.com">https://movie.douban.com</a></span>
+            <span>时光网：<a href="http://movie.mtime.com">http://movie.mtime.com</a></span>
         </div>
         <div class="col-md-3 border-left" id="aboutUsBlock">
             <h4>About Us</h4>
@@ -263,11 +322,11 @@
     </div>
 </div>
 </body>
-<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!--<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+<!--<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
+<!--<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
 <script src="../../../resources/static/js/jQuery/jquery-3.2.1.min.js"></script>
-<script src="../js/popper.min.js"></script>
+<script src="../css/bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>
 <script src="../css/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
 <script src="../js/UtilJs.js"></script>
 </html>
