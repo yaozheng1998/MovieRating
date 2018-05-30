@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DetailPage</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/bootstrap-4.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/customCSS/commonCSS.css">
+    <style type="text/css">
+        #background{
+            position: absolute;
+            z-index: -1;
+
+        }
+        #downArea{
+            padding-top: 5rem;
+        }
+        #downArea img{
+            width: 232px;
+            margin-left: 4.5rem;
+            -moz-box-shadow:0px 5px 17px #A8A8A8; -webkit-box-shadow:0px 5px 17px #A8A8A8; box-shadow:0px 5px 17px #A8A8A8;
+        }
+        #titleBlock{
+            padding-left: 2rem;
+            color: whitesmoke;
+        }
+        #scoreBlock div{
+            color: whitesmoke;
+        }
+        #scoreBlock .source, #scoreBlock footer{
+            color: gainsboro;
+            font-size: 10px;
+        }
+        #highestScore{
+            font-weight: 500;
+            font-size: 85px;
+            font-style: italic;
+            padding-right: 1.25rem;
+        }
+        .blockquote-footer{
+            padding-left: 2rem;
+        }
+        #higherScore, #lowestScore{
+            font-size: 25px;
+            font-weight: 500;
+        }
+        .source{
+            color: #6c757d;
+            padding-top: 0.9rem;
+        }
+        .blur{
+            -webkit-filter: blur(10px); /* Chrome, Opera */
+            -moz-filter: blur(10px);
+            -ms-filter: blur(10px);
+            filter: blur(10px);
+        }
+        /*影片简介的标题*/
+        .introLabel{
+            border-left: 7px solid #003366;
+            padding-left: 0.5rem;
+        }
+        /*影片简介标题所在的row，主要为了设置间距*/
+        .introLabelBlock{
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /*影片简介的内容*/
+        #introContent{
+            font-size: 14px;
+        }
+        /*评论区*/
+        .commentArea{
+            margin: 1rem 0 0 0.8rem;
+            border: 1px solid #f3f3f3;
+            border-radius: 2px;
+            padding: 1rem;
+        }
+        .commentArea img{
+            width:35px;
+        }
+        .downEffect{
+            padding-top: 0.5rem;
+        }
+        .nameEffect{
+            margin-left: -2rem;
+        }
+        .dateEffect{
+            color: rgba(0,0,0,.5);
+        }
+        .contentEffect{
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">MovieRating</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About Us</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+<div class="container-fluid">
+    <!--背景模糊图-->
+    <div class="row border-bottom" id="background">
+        <img src="../images/AmBrh9.jpg" class="blur">
+    </div>
+    <!--模糊图上面的文字部分-->
+    <div class="row" id="downArea">
+        <div class="col-md-3">
+            <img class="rounded" src="http://p0.meituan.net/movie/f193e43ca706aa6bc6a26d6f53f0115a5315542.jpg@464w_644h_1e_1c" alt/>
+        </div>
+        <div class="col-md-7" id="titleBlock">
+            <!--要放置的条目：影片名、英文名、类型、国家/地区、时长、上映时间、导演、编剧、主演、-->
+            <h3>超时空同居</h3>
+            <h5>How Long Will I Love U</h5>
+            <h6>喜剧,爱情,奇幻</h6>
+            <h6>中国大陆 / 101分钟</h6>
+            <h6>2018-05-18大陆上映</h6>
+            <h6>导演：苏伦</h6>
+            <h6>编剧：苏伦</h6>
+            <h6>主演：雷佳音 / 佟丽娅 / 张衣 / 于和伟 / 王正佳 / 更多..</h6>
+        </div>
+        <div class="col-md-2" id="scoreBlock">
+            <!--最高评分-->
+            <div class="row" style="margin-bottom: -1rem;">
+                <blockquote class="blockquote text-right">
+                    <div id="highestScore">
+                        9.6
+                    </div>
+                    <footer class="blockquote-footer">来源于豆瓣电影</footer>
+                </blockquote>
+            </div>
+            <!--次高评分-->
+            <div class="row" style="margin-bottom: -0.3rem;">
+                <div id="higherScore">
+                    9.4
+                </div>
+                <div class="source">
+                    —来源于猫眼电影
+                </div>
+            </div>
+            <!--最低评分-->
+            <div class="row">
+                <div id="lowestScore">
+                    9.2
+                </div>
+                <div class="source">
+                —来源于时光网
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--正文区: 左：影片简介、评论， 右：Top10-->
+    <div class="row">
+        <div class="col-md-9">
+            <div class="col-md-12">
+                <!--简介区-->
+                <div class="row introLabelBlock">
+                    <div class="col-md-12">
+                        <h4 class="introLabel">影片简介</h4>
+                    </div>
+                    <div class="col-md-12">
+                        <p id="introContent">
+                            &nbsp;&nbsp;&nbsp;&nbsp;来自2018年谷小焦（佟丽娅 饰）与1999年陆鸣（雷佳音 饰），两人时空重叠意外住在同一个房间。从互相嫌弃到试图“共谋大业”，阴差阳错发生了一系列好笑的事情。乐在其中的两人并不知道操控这一切的神秘人竟是想要去2037年“投机取巧”的2018年的……
+                        </p>
+                    </div>
+                </div>
+
+                <!--评论区-->
+                <div class="row commentAreaBlock">
+                    <div class="col-md-2">
+                        <h4 class="introLabel">影片评论</h4>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                全部评论
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">全部评论</a>
+                                <a class="dropdown-item" href="#">豆瓣电影</a>
+                                <a class="dropdown-item" href="#">猫眼电影</a>
+                                <a class="dropdown-item" href="#">时光网</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 commentArea">
+                        <div class="row commentBlock">
+                            <div class="col-md-1 ">
+                                <img class="rounded-circle" src="https://img.meituan.net/avatar/ed4f73b6ba1d2de36ff2a343bc14f43019943.jpg@100w_100h_1e_1c">
+                            </div>
+                            <div class="col-md-1 nameEffect downEffect">
+                                <h6>Jobs</h6>
+                            </div>
+                            <div class="col-md-2 dateEffect downEffect">
+                                <h6>2018-5-27</h6>
+                            </div>
+                            <div class="col-md-12 contentEffect">
+                                &nbsp;&nbsp;&nbsp;&nbsp;无论片中的陆鸣怎么选，小焦都会过上衣食无忧的生活，她要么会有一个家财万贯的亲爹，要么会有一个亿万资产的“干爹”（结合片中两人的实际年龄和事实情况，大概就是这个意思吧）
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-md-3">
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div>
+</div>
+<div class="container-fluid footer">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="hr"></div>
+        </div>
+        <div class="col-md-9" id="projectInfoBlock">
+            <h4>MovieRating <span >电影数据集成应用</span></h4>
+            <h6>数据来源：</h6>
+            <span>猫眼电影：<a>http://maoyan.com/films</a></span>
+            <span>豆瓣电影：<a>https://movie.douban.com</a></span>
+            <span>时光网：<a>http://movie.mtime.com</a></span>
+
+        </div>
+        <div class="col-md-3 border-left" id="aboutUsBlock">
+            <h4>About Us</h4>
+            <a href="https://github.com/IMWYY">
+                <img src="https://avatars1.githubusercontent.com/u/17784542?s=460&v=4" alt="w" class="rounded">
+            </a>
+            <a href="https://github.com/bcy97">
+                <img src="https://avatars3.githubusercontent.com/u/16596636?s=460&v=4" alt="b" class="rounded">
+            </a>
+            <a href="https://github.com/yaozheng1998">
+                <img src="https://avatars3.githubusercontent.com/u/19236595?s=460&v=4" alt="y" class="rounded">
+            </a>
+            <a href="https://github.com/RadiationXie">
+                <img src="https://avatars3.githubusercontent.com/u/17785150?s=460&v=4" alt="x" class="rounded">
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="../../../resources/static/js/jQuery/jquery-3.2.1.min.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../css/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
+<script src="../js/UtilJs.js"></script>
+</html>
