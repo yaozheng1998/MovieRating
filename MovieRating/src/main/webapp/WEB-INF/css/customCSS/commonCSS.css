@@ -21,9 +21,12 @@
 .footer #projectInfoBlock, .footer #aboutUsBlock{
     margin-top: 1rem;
 }
-.footer #aboutUsBlock{
+/*.footer #aboutUsBlock{*/
 
-}
+/*}*/
 .footer img{
     width: 30px;
+}
+.footer a{
+    color: rgba(0,0,0,.5);
 }

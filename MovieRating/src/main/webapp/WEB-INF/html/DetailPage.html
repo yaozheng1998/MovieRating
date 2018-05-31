@@ -85,15 +85,40 @@
         .nameEffect{
             margin-left: -2rem;
         }
-        .dateEffect{
+        .starEffect{
+            padding-top: 0.2rem;
+        }
+        .starEffect img {
+            width: 16px;
+        }
+        .dateEffect,.sourceEffect{
             color: rgba(0,0,0,.5);
+        }
+        /*将日期再往左一些*/
+        .dateEffect{
+            margin: 0 2rem 0 -2rem;
+        }
+        /*每个评论小块显示的数据来源*/
+        .sourceEffect{
+            padding-left: 1rem;
+        }
+        .sourceEffect h6{
+            font-size: 14px;
         }
         .contentEffect{
             font-size: 14px;
             margin-top: 0.5rem;
         }
-        
-        
+        /*点赞图标*/
+        .likeImg img{
+            width: 25px;
+            margin-left: 4rem;
+        }
+        .likeNum{
+            color: rgba(0,0,0,.5);
+            font-size: 14px;
+            margin-left: 0.8rem;
+        }
         /*右端影片推荐列表样式*/
         .numLabel{
             font-weight: 700;
@@ -124,8 +149,8 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchInput" autocomplete="off">
+            <button class="btn btn-outline-info my-2 my-sm-0" type="button" id="searchButton">Search</button>
         </form>
     </div>
 </nav>
@@ -207,45 +232,92 @@
                                 全部评论
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">全部评论</a>
-                                <a class="dropdown-item" href="#">豆瓣电影</a>
-                                <a class="dropdown-item" href="#">猫眼电影</a>
-                                <a class="dropdown-item" href="#">时光网</a>
+                                <a class="dropdown-item" href="#" id="allComments">全部评论</a>
+                                <a class="dropdown-item" href="#" id="dbComments">豆瓣电影</a>
+                                <a class="dropdown-item" href="#" id="myComments">猫眼电影</a>
+                                <a class="dropdown-item" href="#" id="timeComments">时光网</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12 commentArea">
                         <div class="row commentBlock">
-                            <div class="col-md-1 ">
-                                <img class="rounded-circle" src="https://img.meituan.net/avatar/ed4f73b6ba1d2de36ff2a343bc14f43019943.jpg@100w_100h_1e_1c">
+                            <div class="col-md-1">
+                                <img class="rounded-circle commentPortrait" src="https://img.meituan.net/avatar/ed4f73b6ba1d2de36ff2a343bc14f43019943.jpg@100w_100h_1e_1c">
                             </div>
                             <div class="col-md-1 nameEffect downEffect">
-                                <h6>Jobs</h6>
+                                <h6 class="commentUsername">Jobs</h6>
+                            </div>
+                            <div class="col-md-2 starEffect">
+                                <img src="../images/star.png"/>
+                                <img src="../images/star.png"/>
+                                <img src="../images/star.png"/>
+                                <img src="../images/star.png"/>
+                                <img src="../images/left-star.png"/>
                             </div>
                             <div class="col-md-2 dateEffect downEffect">
-                                <h6>2018-5-27</h6>
+                                <h6 class="commentDate">2018-5-27</h6>
                             </div>
-                            <div class="col-md-12 contentEffect">
+                            <div class="col-md-1 offset-4 likeImg">
+                                <img src="../images/like.png"/>
+                            </div>
+                            <div class="col-md-1">
+                                <h6 class="likeNum downEffect">10001</h6>
+                            </div>
+                            <div class="col-md-12 contentEffect commentContent">
                                 &nbsp;&nbsp;&nbsp;&nbsp;无论片中的陆鸣怎么选，小焦都会过上衣食无忧的生活，她要么会有一个家财万贯的亲爹，要么会有一个亿万资产的“干爹”（结合片中两人的实际年龄和事实情况，大概就是这个意思吧）
                             </div>
+                            <div class="col-md-2 offset-10 sourceEffect">
+                                <h6>--来源于豆瓣电影</h6>
+                            </div>
                         </div>
+                        <div class="hr"></div>
                         <div class="row commentBlock">
-                            <div class="col-md-12">
-                                <div class="hr"></div>
-                            </div>
-                            <div class="col-md-1 ">
-                                <img class="rounded-circle" src="https://img.meituan.net/avatar/ed4f73b6ba1d2de36ff2a343bc14f43019943.jpg@100w_100h_1e_1c">
+                            <div class="col-md-1">
+                                <img class="rounded-circle commentPortrait" src="https://img.meituan.net/avatar/ed4f73b6ba1d2de36ff2a343bc14f43019943.jpg@100w_100h_1e_1c">
                             </div>
                             <div class="col-md-1 nameEffect downEffect">
-                                <h6>Jobs</h6>
+                                <h6 class="commentUsername">Jobs</h6>
+                            </div>
+                            <div class="col-md-2 starEffect">
+                                <img src="../images/star.png"/>
+                                <img src="../images/star.png"/>
+                                <img src="../images/star.png"/>
+                                <img src="../images/left-star.png"/>
+                                <img src="../images/gray-star.png"/>
                             </div>
                             <div class="col-md-2 dateEffect downEffect">
-                                <h6>2018-5-27</h6>
+                                <h6 class="commentDate">2018-5-27</h6>
                             </div>
-                            <div class="col-md-12 contentEffect">
+                            <div class="col-md-1 offset-4 likeImg">
+                                <img src="../images/like.png"/>
+                            </div>
+                            <div class="col-md-1">
+                                <h6 class="likeNum downEffect">10001</h6>
+                            </div>
+                            <div class="col-md-12 contentEffect commentContent">
                                 &nbsp;&nbsp;&nbsp;&nbsp;无论片中的陆鸣怎么选，小焦都会过上衣食无忧的生活，她要么会有一个家财万贯的亲爹，要么会有一个亿万资产的“干爹”（结合片中两人的实际年龄和事实情况，大概就是这个意思吧）
                             </div>
+                            <div class="col-md-2 offset-10 sourceEffect">
+                                <h6>--来源于豆瓣电影</h6>
+                            </div>
                         </div>
+                        <!--<div class="row commentBlock">-->
+                            <!--<div class="col-md-1 ">-->
+                                <!--<img class="rounded-circle" src="https://img.meituan.net/avatar/ed4f73b6ba1d2de36ff2a343bc14f43019943.jpg@100w_100h_1e_1c">-->
+                            <!--</div>-->
+                            <!--<div class="col-md-1 nameEffect downEffect">-->
+                                <!--<h6>Jobs</h6>-->
+                            <!--</div>-->
+                            <!--<div class="col-md-2 dateEffect downEffect">-->
+                                <!--<h6>2018-5-27</h6>-->
+                            <!--</div>-->
+                            <!--<div class="col-md-2 offset-6 sourceEffect downEffect">-->
+                                <!--<h6>来源于豆瓣电影</h6>-->
+                            <!--</div>-->
+                            <!--<div class="col-md-12 contentEffect">-->
+                                <!--&nbsp;&nbsp;&nbsp;&nbsp;无论片中的陆鸣怎么选，小焦都会过上衣食无忧的生活，她要么会有一个家财万贯的亲爹，要么会有一个亿万资产的“干爹”（结合片中两人的实际年龄和事实情况，大概就是这个意思吧）-->
+                            <!--</div>-->
+                        <!--</div>-->
                     </div>
                 </div>
             </div>
@@ -329,4 +401,6 @@
 <script src="../css/bootstrap-4.0.0/assets/js/vendor/popper.min.js"></script>
 <script src="../css/bootstrap-4.0.0/dist/js/bootstrap.min.js"></script>
 <script src="../js/UtilJs.js"></script>
+<script src="../js/NavigationJs.js"></script>
+<script src="../js/DetailPageJs.js"></script>
 </html>
