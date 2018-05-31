@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>搜索结果</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/bootstrap-4.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/customCSS/commonCSS.css">
+    <style type="text/css">
+        #resultsList{
+            margin-top: 1rem;
+            /*margin-bottom: 14rem;*/
+            min-height: 500px;
+        }
+        #resultsList img{
+            width: 150px;
+        }
+        #resultsList h6{
+            font-size: 0.1rem;
+        }
+        /*搜索结果标题*/
+        .introLabel{
+            border-left: 7px solid #003366;
+            padding-left: 0.5rem;
+        }
+        .introLabelBlock{
+            margin-bottom: 1rem;
+        }
+        #titleBlock span{
+            color: #ffb400;
+        }
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">MovieRating</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About Us</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchInput" autocomplete="off">
+            <button class="btn btn-outline-info my-2 my-sm-0" type="button" id="searchButton">Search</button>
+        </form>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row" id="resultsList">
+        <div class="col-md-6 offset-3">
+            <div class="row introLabelBlock">
+                <div class="col-md-12">
+                    <h4 class="introLabel">搜索结果</h4>
+                </div>
+            </div>
+            <div class="row resultItem">
+                <div class="col-md-3">
+                    <img class="rounded" src="http://p0.meituan.net/movie/f193e43ca706aa6bc6a26d6f53f0115a5315542.jpg@464w_644h_1e_1c" alt/>
+                </div>
+                <div class="col-md-8" id="titleBlock">
+                    <!--要放置的条目：影片名、英文名、类型、国家/地区、时长、上映时间、导演、编剧、主演、-->
+                    <h5>超时空同居</h5>
+                    <h6>How Long Will I Love U</h6>
+                    <h6>评分：<span>9.6</span>（豆瓣） <span>9.4</span>（猫眼） <span>9.2</span>（时光网）</h6>
+                    <h6>喜剧,爱情,奇幻</h6>
+                    <h6>中国大陆 / 101分钟</h6>
+                    <h6>2018-05-18大陆上映</h6>
+                    <h6>导演：苏伦</h6>
+                    <h6>编剧：苏伦</h6>
+                    <h6>主演：雷佳音 / 佟丽娅 / 张衣 / 于和伟 / 王正佳 / 更多..</h6>
+                </div>
+            </div>
+            <div class="hr"></div>
+            <div class="row resultItem">
+                <div class="col-md-3">
+                    <img class="rounded" src="http://p0.meituan.net/movie/f193e43ca706aa6bc6a26d6f53f0115a5315542.jpg@464w_644h_1e_1c" alt/>
+                </div>
+                <div class="col-md-8" id="titleBlock">
+                    <!--要放置的条目：影片名、英文名、类型、国家/地区、时长、上映时间、导演、编剧、主演、-->
+                    <h5>超时空同居</h5>
+                    <h6>How Long Will I Love U</h6>
+                    <h6>评分：<span>9.6</span>（豆瓣） <span>9.4</span>（猫眼） <span>9.2</span>（时光网）</h6>
+                    <h6>喜剧,爱情,奇幻</h6>
+                    <h6>中国大陆 / 101分钟</h6>
+                    <h6>2018-05-18大陆上映</h6>
+                    <h6>导演：苏伦</h6>
+                    <h6>编剧：苏伦</h6>
+                    <h6>主演：雷佳音 / 佟丽娅 / 张衣 / 于和伟 / 王正佳 / 更多..</h6>
+                </div>
+            </div>
+            <div class="hr"></div>
+            <div class="row resultItem">
+                <div class="col-md-3">
+                    <img class="rounded" src="http://p0.meituan.net/movie/f193e43ca706aa6bc6a26d6f53f0115a5315542.jpg@464w_644h_1e_1c" alt/>
+                </div>
+                <div class="col-md-8" id="titleBlock">
+                    <!--要放置的条目：影片名、英文名、类型、国家/地区、时长、上映时间、导演、编剧、主演、-->
+                    <h5>超时空同居</h5>
+                    <h6>How Long Will I Love U</h6>
+                    <h6>评分：<span>9.6</span>（豆瓣） <span>9.4</span>（猫眼） <span>9.2</span>（时光网）</h6>
+                    <h6>喜剧,爱情,奇幻</h6>
+                    <h6>中国大陆 / 101分钟</h6>
+                    <h6>2018-05-18大陆上映</h6>
+                    <h6>导演：苏伦</h6>
+                    <h6>编剧：苏伦</h6>
+                    <h6>主演：雷佳音 / 佟丽娅 / 张衣 / 于和伟 / 王正佳 / 更多..</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid footer">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="hr"></div>
+        </div>
+        <div class="col-md-9" id="projectInfoBlock">
+            <h4>MovieRating <span >电影数据集成应用</span></h4>
+            <h6>数据来源：</h6>
+            <span>猫眼电影：<a href="http://maoyan.com/films">http://maoyan.com/films</a></span>
+            <span>豆瓣电影：<a href="https://movie.douban.com">https://movie.douban.com</a></span>
+            <span>时光网：<a href="http://movie.mtime.com">http://movie.mtime.com</a></span>
+        </div>
+        <div class="col-md-3 border-left" id="aboutUsBlock">
+            <h4>About Us</h4>
+            <a href="https://github.com/IMWYY">
+                <img src="https://avatars1.githubusercontent.com/u/17784542?s=460&v=4" alt="w" class="rounded">
+            </a>
+            <a href="https://github.com/bcy97">
+                <img src="https://avatars3.githubusercontent.com/u/16596636?s=460&v=4" alt="b" class="rounded">
+            </a>
+            <a href="https://github.com/yaozheng1998">
+                <img src="https://avatars3.githubusercontent.com/u/19236595?s=460&v=4" alt="y" class="rounded">
+            </a>
+            <a href="https://github.com/RadiationXie">
+                <img src="https://avatars3.githubusercontent.com/u/17785150?s=460&v=4" alt="x" class="rounded">
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../../../resources/static/js/jQuery/jquery-3.2.1.min.js"></script>
+<script src="../js/UtilJs.js"></script>
+<script src="../js/NavigationJs.js"></script>
+</html>
