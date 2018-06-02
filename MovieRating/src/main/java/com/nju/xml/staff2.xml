@@ -1,0 +1,23 @@
+<staffs>
+    <staff order="1">
+        <id>1</id>
+        <info>
+            <name>wang</name>
+            <age>27</age>
+        </info>
+    </staff>
+    <staff order="2">
+        <id>2</id>
+        <info>
+            <name>Li</name>
+            <age>24</age>
+        </info>
+    </staff>
+    <staff order="3">
+        <id>3</id>
+        <info>
+            <name>Q1</name>
+            <age>29</age>
+        </info>
+    </staff>
+</staffs>
