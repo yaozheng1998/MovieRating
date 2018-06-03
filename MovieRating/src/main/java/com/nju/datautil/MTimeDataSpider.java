@@ -3,6 +3,8 @@ package com.nju.datautil;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.nju.dao.MTimeDao;
+import com.nju.entity.MTime;
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
@@ -11,10 +13,14 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 
 public class MTimeDataSpider {
+
+    @Autowired
+    MTimeDao mTimeDao;
 
     public void catchMovieList() {
         String url = "https://api-m.mtime.cn/Showtime/LocationMovies.api?locationId=290";
@@ -35,7 +41,7 @@ public class MTimeDataSpider {
                     parseData(responseBody);
                 }
             } finally {
-                response.close();
+//                response.close();
             }
         } catch (ClientProtocolException e) {
             e.printStackTrace();
@@ -59,9 +65,13 @@ public class MTimeDataSpider {
         JsonArray ms = json.get("ms").getAsJsonArray();
         for (int i = 0; i < ms.size(); i++) {
             JsonObject subObject = ms.get(i).getAsJsonObject();
-            System.out.println(subObject.get("tCn").getAsString());
+            MTime mTime = new MTime();
+            mTime.setMovieId(subObject.get("id").getAsLong());
+            mTime.setName(subObject.get("tCn").getAsString());
+            mTime.setRate(subObject.get("r").getAsDouble());
+            mTimeDao.save(mTime);
+            System.out.println(mTime);
         }
-        System.out.println(json.get("date").getAsString());
     }
 
 }
