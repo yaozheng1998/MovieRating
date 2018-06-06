@@ -2,28 +2,28 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:output method="xml" omit-xml-declaration="yes"/>
 
-    <!--<xsl:variable name="staff" select="document('staff2.xml')"/>-->
-
     <xsl:template match="/">
-        <staffs>
-            <xsl:for-each select="/staffs/staff">
-                <staff>
-                    <xsl:attribute name="order">
-                        <xsl:value-of select="@order"/>
-                    </xsl:attribute>
-
-                    <xsl:copy-of select="id"/>
-
-                    <info>
-                    <xsl:copy-of select="name"/>
-                    <xsl:copy-of select="age"/>
-
-                    </info>
-                </staff>
+        <comments>
+            <xsl:for-each select="/comments/doubanComment">
+                <comment>
+                    <user>
+                        <xsl:copy-of select="user/name"/>
+                        <xsl:copy-of select="user/avatarUrl"/>
+                    </user>
+                    <date>
+                        <xsl:value-of select="date"/>
+                    </date>
+                    <content>
+                        <xsl:value-of select="doubanContent"/>
+                    </content>
+                    <rate>
+                        <xsl:value-of select="doubanRate"/>
+                    </rate>
+                </comment>
 
             </xsl:for-each>
 
-        </staffs>
+        </comments>
 
     </xsl:template>
 

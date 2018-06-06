@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 @Service
 public class MovieServiceImpl implements MovieService {
+
     @Override
     public ArrayList<Movie> loadAllMovies() {
         return null;
