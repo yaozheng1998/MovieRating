@@ -13,13 +13,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class MTimeDaoTest {
 
     @Autowired
-    MTimeDao mTimeDao;
+    MTimeScoreDao mTimeDao;
 
     @Test
-    public void name() throws Exception {
+    public void test() throws Exception {
         MTime mTime = new MTime();
         mTime.setMovieId(1);
-        mTime.setName("bcy");
+        mTime.setMovieName("bcy");
         mTime.setRate(10);
         mTimeDao.save(mTime);
     }

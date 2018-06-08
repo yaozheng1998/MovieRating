@@ -4,25 +4,35 @@
 
     <xsl:template match="/">
         <comments>
-            <xsl:for-each select="/comments/doubanComment">
+            <xsl:for-each select="/comments/maoYanComment">
                 <comment>
+
+                    <from>2</from>
                     <user>
-                        <xsl:copy-of select="user/name"/>
-                        <xsl:copy-of select="user/avatarUrl"/>
+                        <xsl:value-of select="username"/>
                     </user>
+
+                    <avatar>
+                        <xsl:value-of select="avatar"/>
+                    </avatar>
+
                     <date>
-                        <xsl:value-of select="date"/>
+                        <xsl:value-of select="commentTime"/>
                     </date>
+
                     <content>
-                        <xsl:value-of select="doubanContent"/>
+                        <xsl:value-of select="commentText"/>
                     </content>
+
+                    <thumb>
+                        <xsl:value-of select="commentUp"/>
+                    </thumb>
+
                     <rate>
-                        <xsl:value-of select="doubanRate"/>
+                        <xsl:value-of select="userRate"/>
                     </rate>
                 </comment>
-
             </xsl:for-each>
-
         </comments>
 
     </xsl:template>

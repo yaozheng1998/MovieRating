@@ -3,7 +3,7 @@ package com.nju.datautil;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.nju.dao.MTimeDao;
+import com.nju.dao.MTimeScoreDao;
 import com.nju.entity.MTime;
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
@@ -20,7 +20,7 @@ import java.io.IOException;
 public class MTimeDataSpider {
 
     @Autowired
-    MTimeDao mTimeDao;
+    MTimeScoreDao mTimeDao;
 
     public void catchMovieList() {
         String url = "https://api-m.mtime.cn/Showtime/LocationMovies.api?locationId=290";
@@ -66,8 +66,8 @@ public class MTimeDataSpider {
         for (int i = 0; i < ms.size(); i++) {
             JsonObject subObject = ms.get(i).getAsJsonObject();
             MTime mTime = new MTime();
-            mTime.setMovieId(subObject.get("id").getAsLong());
-            mTime.setName(subObject.get("tCn").getAsString());
+            mTime.setMovieId(subObject.get("id").getAsInt());
+            mTime.setMovieName(subObject.get("tCn").getAsString());
             mTime.setRate(subObject.get("r").getAsDouble());
             mTimeDao.save(mTime);
             System.out.println(mTime);

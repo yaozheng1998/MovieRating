@@ -1,11 +1,17 @@
 package com.nju.service.impl;
 
+import com.nju.dao.*;
 import com.nju.entity.Comment;
+import com.nju.entity.MTimeComment;
+import com.nju.entity.MaoYanComment;
 import com.nju.entity.Movie;
 import com.nju.service.MovieService;
+import com.nju.util.XmlUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * create by stephen on 2018/5/31
@@ -13,43 +19,36 @@ import java.util.ArrayList;
 @Service
 public class MovieServiceImpl implements MovieService {
 
-    @Override
-    public ArrayList<Movie> loadAllMovies() {
-        return null;
+    private MovieDao movieDao;
+
+
+    @Autowired
+    public MovieServiceImpl(MovieDao movieDao){
+        this.movieDao = movieDao;
     }
 
     @Override
-    public ArrayList<Movie> loadTopTenMovies() {
-        return null;
+    public List<Movie> loadAllMovies() {
+        return movieDao.findAll();
     }
 
     @Override
-    public ArrayList<Movie> searchMovie(String keyword) {
-        return null;
+    public List<Movie> loadTopTenMovies() {
+        Sort sort = new Sort(Sort.Direction.DESC, "rating");
+//        Pageable pageable = PageRequest.of(1, 10, sort);
+        List<Movie> movies = movieDao.findAll(sort);
+        return movies.subList(0, 10);
+    }
+
+    @Override
+    public List<Movie> searchMovie(String keyword) {
+        return movieDao.findAllByNameLike(keyword);
     }
 
     @Override
     public Movie loadMovie(int id) {
-        return null;
+        return movieDao.getOne(id);
     }
 
-    @Override
-    public ArrayList<Comment> loadAllComments(int movieId) {
-        return null;
-    }
 
-    @Override
-    public ArrayList<Comment> loadCommentsFromDouban(int movieId) {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Comment> loadCommentsFromMaoyan(int movieId) {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Comment> loadCommentsFromTime(int movieId) {
-        return null;
-    }
 }

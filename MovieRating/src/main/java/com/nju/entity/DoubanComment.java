@@ -8,7 +8,6 @@ import lombok.Data;
 @Data
 public class DoubanComment {
 
-    private User user;
     private String date;
     private String doubanContent;
     private double doubanRate;

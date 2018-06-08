@@ -14,7 +14,6 @@ public class WelcomePageController {
     @RequestMapping(method = RequestMethod.GET)
     public String visit(Model model){
 //        填充数据
-
         return "WelcomePage";
     }
 }
