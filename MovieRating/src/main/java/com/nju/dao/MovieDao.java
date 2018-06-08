@@ -10,6 +10,6 @@ import java.util.List;
  */
 public interface MovieDao extends JpaRepository<Movie, Integer> {
 
-    public List<Movie> findAllByNameLike(String name);
+    List<Movie> findAllByNameLike(String name);
 
 }

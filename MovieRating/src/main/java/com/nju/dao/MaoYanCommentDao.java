@@ -11,8 +11,8 @@ import java.util.List;
  */
 public interface MaoYanCommentDao extends JpaRepository<MaoYanComment, Integer> {
 
-    public List<MaoYanComment> findAllByMovieNo(int id);
+    List<MaoYanComment> findAllByMovieNo(int id);
 
     @Query(value = "select c from MaoYanComment c, Movie m where c.movieNo = m.maoyanId and m.id = ?1")
-    public List<MaoYanComment> findAllByCommonId(Integer id);
+    List<MaoYanComment> findAllByCommonId(Integer id);
 }

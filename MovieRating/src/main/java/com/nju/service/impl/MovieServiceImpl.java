@@ -1,12 +1,8 @@
 package com.nju.service.impl;
 
 import com.nju.dao.*;
-import com.nju.entity.Comment;
-import com.nju.entity.MTimeComment;
-import com.nju.entity.MaoYanComment;
 import com.nju.entity.Movie;
 import com.nju.service.MovieService;
-import com.nju.util.XmlUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;

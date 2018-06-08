@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface MeTimeCommentDao extends JpaRepository<MTimeComment, Integer> {
+public interface MTimeCommentDao extends JpaRepository<MTimeComment, Integer> {
 
-    public List<MTimeComment> findAllByMovieId(int id);
+    List<MTimeComment> findAllByMovieId(int id);
 
     @Query(value = "select c from MTimeComment c, Movie m where c.movieId = m.mtimeId and m.id = ?1")
-    public List<MTimeComment> findAllByCommonId(int id);
+    List<MTimeComment> findAllByCommonId(int id);
 }

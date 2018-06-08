@@ -2,9 +2,7 @@ package com.nju.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * create by stephen on 2018/5/31
@@ -30,6 +28,8 @@ public class Movie {
     private String directors;   // 导演
     private String casts;       // 主演
     private double doubanRating;    // 豆瓣评分
-    private double rating;    // 豆瓣评分
+    private double mTimeRating;    // 时光评分
+    private double maoyanRating;    // 猫眼评分
+    private double rating;      // 综合评分 三者取平均
 
 }

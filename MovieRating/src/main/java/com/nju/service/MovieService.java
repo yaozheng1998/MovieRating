@@ -1,9 +1,7 @@
 package com.nju.service;
 
-import com.nju.entity.Comment;
 import com.nju.entity.Movie;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

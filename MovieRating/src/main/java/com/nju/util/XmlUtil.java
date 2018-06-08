@@ -2,6 +2,7 @@ package com.nju.util;
 
 
 import com.nju.entity.*;
+import com.nju.entity.Comment;
 import com.thoughtworks.xstream.XStream;
 
 import javax.xml.transform.Transformer;
@@ -10,7 +11,6 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,7 +37,6 @@ public class XmlUtil {
         return (List<Comment>) XmlUtil.xmlToBean(targetXml);
     }
 
-    @SuppressWarnings("uncheck")
     public static List<Comment> transDouban(List<DoubanComment> doubanComments) {
         String srcXml = XmlUtil.beanToXml(doubanComments);
         String targetXml = XmlUtil.transformXmlByXslt(srcXml,XmlUtil.DOUBAN_COMMENT_XSLT);

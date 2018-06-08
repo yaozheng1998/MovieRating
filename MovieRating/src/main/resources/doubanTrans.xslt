@@ -10,7 +10,7 @@
                     <from>0</from>
 
                     <user>
-                        <xsl:value-of select="username"/>
+                        <xsl:value-of select="uid"/>
                     </user>
 
                     <avatar>
@@ -18,19 +18,17 @@
                     </avatar>
 
                     <date>
-                        <xsl:value-of select="commentTime"/>
+                        <xsl:value-of select="create_at"/>
                     </date>
 
                     <content>
-                        <xsl:value-of select="commentText"/>
+                        <xsl:value-of select="content"/>
                     </content>
 
-                    <thumb>
-                        <xsl:value-of select="commentUp"/>
-                    </thumb>
+                    <thumb>0</thumb>
 
                     <rate>
-                        <xsl:value-of select="userRate"/>
+                        <xsl:value-of select="rating"/>
                     </rate>
                 </comment>
             </xsl:for-each>

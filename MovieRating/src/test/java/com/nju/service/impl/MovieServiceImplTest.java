@@ -12,7 +12,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -59,13 +58,9 @@ public class MovieServiceImplTest {
         for (Movie movie: movies) {
 
             MTime mTime = mTimeScoreDao.getOne(movie.getMtimeId());
-            MaoYan maoYan = maoYanScoreDao.getOne((int)movie.getMaoyanId());
-System.out.println("******************************");
-System.out.println(movie.getName());
-System.out.println("******************************");
-            double rate = (movie.getDoubanRating() + maoYan.getScore() + mTime.getRate())/3;
-            rate = (double)Math.round(rate*100)/100;
-            movie.setRating(rate);
+            MaoYan maoYan = maoYanScoreDao.getOne(movie.getMaoyanId());
+            movie.setMTimeRating(mTime.getRate());
+            movie.setMaoyanRating(maoYan.getScore());
         }
         movieDao.saveAll(movies);
     }
