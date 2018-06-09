@@ -6,12 +6,14 @@ import com.nju.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * create by stephen on 2018/5/31
  */
+@Transactional
 @Service
 public class MovieServiceImpl implements MovieService {
 
@@ -24,7 +26,8 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<Movie> loadAllMovies() {
-        return movieDao.findAll();
+        Sort sort = new Sort(Sort.Direction.DESC, "rating");
+        return movieDao.findAll(sort);
     }
 
     @Override
@@ -44,6 +47,5 @@ public class MovieServiceImpl implements MovieService {
     public Movie loadMovie(int id) {
         return movieDao.getOne(id);
     }
-
 
 }
