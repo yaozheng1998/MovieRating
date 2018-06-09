@@ -16,7 +16,7 @@ public class DoubanComment {
 
     @Id
     private int id;                 // 评论id
-    private int dooubanId;          // 豆瓣里的电影id
+    private int doubanId;          // 豆瓣里的电影id
     private String uid;             // 用户id
     private String avatar;          // 用户头像
     private String signature;       // 用户前面

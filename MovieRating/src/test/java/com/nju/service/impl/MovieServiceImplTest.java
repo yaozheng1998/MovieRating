@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -22,56 +23,32 @@ import java.util.List;
 public class MovieServiceImplTest {
 
     @Autowired
-    private MovieDao movieDao;
-    @Autowired
-    private MaoYanScoreDao maoYanScoreDao;
-    @Autowired
-    private MTimeScoreDao mTimeScoreDao;
-
-    @Autowired
     private MovieService movieService;
-    @Autowired
-    private CommentService commentService;
 
     @Test
-    public void test1() throws Exception {
-        List<MTime> mTimes = mTimeScoreDao.findAll();
-        for (MTime mTime: mTimes) {
-            if (mTime.getRate() < 0) {
-                mTime.setRate(0);
-            }
-        }
-        mTimeScoreDao.saveAll(mTimes);
-
-        List<MaoYan> maoYans = maoYanScoreDao.findAll();
-        for (MaoYan maoYan: maoYans) {
-            if (maoYan.getScore() < 0) {
-                maoYan.setScore(0);
-            }
-        }
-        maoYanScoreDao.saveAll(maoYans);
+    public void loadAllMovies() {
+        List<Movie> movies =  movieService.loadAllMovies();
+        System.out.println(movies.size());
     }
 
     @Test
-    public void test2() throws Exception {
-        List<Movie> movies = movieDao.findAll();
-        for (Movie movie: movies) {
-
-            MTime mTime = mTimeScoreDao.getOne(movie.getMtimeId());
-            MaoYan maoYan = maoYanScoreDao.getOne(movie.getMaoyanId());
-            movie.setMTimeRating(mTime.getRate());
-            movie.setMaoyanRating(maoYan.getScore());
-        }
-        movieDao.saveAll(movies);
+    public void loadTopTenMovies() {
+        List<Movie> movies =  movieService.loadTopTenMovies();
+        System.out.println(movies.size());
     }
-
 
     @Test
-    public void test3() throws Exception {
-        List<Comment> comments =commentService.loadCommentsFromMaoyan(3);
-        System.out.println(comments.size());
-        System.out.println(comments.get(0).toString());
+    public void searchMovie() {
+        List<Movie> movies =  movieService.searchMovie("%人%");
+        System.out.println(movies.size());
     }
+
+    @Test
+    public void loadMovie() {
+        Movie movie = movieService.loadMovie(2);
+        System.out.println(movie.getName());
+    }
+
 
 
 }

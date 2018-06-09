@@ -11,8 +11,8 @@ import java.util.List;
  */
 public interface DoubanCommentDao extends JpaRepository<DoubanComment, Integer> {
 
-    List<DoubanComment> findAllByDooubanId(Integer doubanId);
+    List<DoubanComment> findAllByDoubanId(Integer doubanId);
 
-    @Query(value = "select c from DoubanComment c, Movie m where c.dooubanId = m.doubanId and m.id = ?1")
+    @Query(value = "select c from DoubanComment c, Movie m where c.doubanId = m.doubanId and m.id = ?1")
     List<DoubanComment> findAllByCommonId(Integer id);
 }

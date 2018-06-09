@@ -17,7 +17,6 @@ public class MovieServiceImpl implements MovieService {
 
     private MovieDao movieDao;
 
-
     @Autowired
     public MovieServiceImpl(MovieDao movieDao){
         this.movieDao = movieDao;
@@ -38,7 +37,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<Movie> searchMovie(String keyword) {
-        return movieDao.findAllByNameLike(keyword);
+        return movieDao.findAllByNameLike("%" + keyword + "%");
     }
 
     @Override
