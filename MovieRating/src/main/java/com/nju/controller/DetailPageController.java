@@ -42,27 +42,4 @@ public class DetailPageController {
         return "DetailPage";
     }
 
-    @RequestMapping(value = "/loadAll", method = RequestMethod.GET)
-    @ResponseBody
-    public List<Comment> loadAllComments(@RequestParam("id")int id){
-        return commentService.loadAllComments(id);
-    }
-
-    @RequestMapping(value = "/loadDouban", method = RequestMethod.GET)
-    @ResponseBody
-    public List<Comment> loadDoubanComments(@RequestParam("id")int id){
-        return commentService.loadAllComments(id);
-    }
-
-    @RequestMapping(value = "/loadMaoyan", method = RequestMethod.GET)
-    @ResponseBody
-    public List<Comment> loadMaoyanComments(@RequestParam("id")int id){
-        return commentService.loadAllComments(id);
-    }
-
-    @RequestMapping(value = "/loadMtime", method = RequestMethod.GET)
-    @ResponseBody
-    public List<Comment> loadMtimeComments(@RequestParam("id")int id){
-        return commentService.loadAllComments(id);
-    }
 }

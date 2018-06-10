@@ -1,3 +1,6 @@
+.navbar-brand,.nav-link{
+    cursor: pointer;
+}
 /*分割线样式*/
 .hr{
     height:2px;

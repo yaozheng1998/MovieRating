@@ -138,8 +138,8 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">MovieRating</a>
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand">MovieRating</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -147,14 +147,14 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" id="home">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">About Us</a>
+                <a class="nav-link" id="aboutUs">About Us</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchInput" autocomplete="off">
+            <input class="form-control mr-sm-2" placeholder="Search" id="searchInput" autocomplete="off">
             <button class="btn btn-outline-info my-2 my-sm-0" type="button" id="searchButton">Search</button>
         </form>
     </div>
@@ -234,10 +234,10 @@
                                 全部评论
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#" id="allComments">全部评论</a>
-                                <a class="dropdown-item" href="#" id="dbComments">豆瓣电影</a>
-                                <a class="dropdown-item" href="#" id="myComments">猫眼电影</a>
-                                <a class="dropdown-item" href="#" id="timeComments">时光网</a>
+                                <a class="dropdown-item" id="allComments">全部评论</a>
+                                <a class="dropdown-item" id="dbComments">豆瓣电影</a>
+                                <a class="dropdown-item" id="myComments">猫眼电影</a>
+                                <a class="dropdown-item" id="timeComments">时光网</a>
                             </div>
                         </div>
                     </div>
@@ -268,8 +268,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="doubanComment">
-                            <div class="row disappear commentBlock" th:each="comment,commentStat : ${boubanCommentList}">
+                        <div id="doubanComment" class="disappear">
+                            <div class="row commentBlock" th:each="comment,commentStat : ${boubanCommentList}">
                                 <div th:class="${commentStat.index}?'col-md-12 hr':''"></div>
                                 <div class="col-md-1">
                                     <img class="rounded-circle commentPortrait" th:src="${comment.avatar}">
@@ -294,8 +294,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="maoyanComment">
-                            <div class="row disappear commentBlock" th:each="comment,commentStat : ${maoyanCommentList}">
+                        <div id="maoyanComment" class="disappear">
+                            <div class="row commentBlock" th:each="comment,commentStat : ${maoyanCommentList}">
                                 <div th:class="${commentStat.index}?'col-md-12 hr':''"></div>
                                 <div class="col-md-1">
                                     <img class="rounded-circle commentPortrait" th:src="${comment.avatar}">
@@ -320,8 +320,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="mtimeComment">
-                            <div class="row disappear commentBlock" th:each="comment,commentStat : ${mTimeCommentList}">
+                        <div id="mtimeComment" class="disappear">
+                            <div class="row commentBlock" th:each="comment,commentStat : ${mTimeCommentList}">
                                 <div th:class="${commentStat.index}?'col-md-12 hr':''"></div>
                                 <div class="col-md-1">
                                     <img class="rounded-circle commentPortrait" th:src="${comment.avatar}">
@@ -361,7 +361,7 @@
                 </div>
             </div>
             <div class="row" th:each="movie, movieStat : ${topTenMovies}">
-                <div class="col-md-1 numLabel" th:text="${movieStat.index + 1}">
+                <div class="col-md-1 numLabel" th:text="${movieStat.index + 1 + '. '}">
                 </div>
                 <div class="col-md-10">
                     <span class="recNameLabel" th:text="${movie.name}">超时空同居</span>&nbsp;&nbsp;<span class="recScoreLabel" th:text="${movie.rating}">9.6</span>
