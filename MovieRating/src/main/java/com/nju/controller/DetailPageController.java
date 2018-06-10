@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -30,8 +31,38 @@ public class DetailPageController {
         model.addAttribute("movie", movie);
         model.addAttribute("topTenMovies", topTenMovies);
 
-        List<Comment> commentList = commentService.loadAllComments(id);
-        model.addAttribute("commentsList", commentList);
+        List<Comment> allCommentList = commentService.loadAllComments(id);
+        List<Comment> boubanCommentList = commentService.loadCommentsFromDouban(id);
+        List<Comment> maoyanCommentList = commentService.loadCommentsFromMaoyan(id);
+        List<Comment> mTimeCommentList = commentService.loadCommentsFromTime(id);
+        model.addAttribute("commentsList", allCommentList);
+        model.addAttribute("boubanCommentList", boubanCommentList);
+        model.addAttribute("maoyanCommentList", maoyanCommentList);
+        model.addAttribute("mTimeCommentList", mTimeCommentList);
         return "DetailPage";
+    }
+
+    @RequestMapping(value = "/loadAll", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Comment> loadAllComments(@RequestParam("id")int id){
+        return commentService.loadAllComments(id);
+    }
+
+    @RequestMapping(value = "/loadDouban", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Comment> loadDoubanComments(@RequestParam("id")int id){
+        return commentService.loadAllComments(id);
+    }
+
+    @RequestMapping(value = "/loadMaoyan", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Comment> loadMaoyanComments(@RequestParam("id")int id){
+        return commentService.loadAllComments(id);
+    }
+
+    @RequestMapping(value = "/loadMtime", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Comment> loadMtimeComments(@RequestParam("id")int id){
+        return commentService.loadAllComments(id);
     }
 }

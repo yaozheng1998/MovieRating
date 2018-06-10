@@ -5,7 +5,7 @@ $(function () {
         if(searchContent === undefined || searchContent === ""){
             searchInput.focus();
         }else{
-            window.location.href = getContextPath() + "/searchResultPage?keyword=" + searchContent;
+            window.location.href = getContextPath() + "/search?keyword=" + searchContent;
         }
     })
 });

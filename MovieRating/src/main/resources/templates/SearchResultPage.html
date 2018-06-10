@@ -63,7 +63,7 @@
                 </div>
             </div>
             <div class="row resultItem" th:each="result : ${searchResults}">
-                <div th:class="${resultStat.index}?'':'col-md-12 hr'"></div>
+                <div th:class="${resultStat.index}?'col-md-12 hr':''"></div>
                 <div class="col-md-3">
                     <img class="rounded" src="http://p0.meituan.net/movie/f193e43ca706aa6bc6a26d6f53f0115a5315542.jpg@464w_644h_1e_1c" alt/>
                 </div>

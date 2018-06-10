@@ -30,3 +30,6 @@
 .footer a{
     color: rgba(0,0,0,.5);
 }
+.disappear{
+    display: none;
+}
