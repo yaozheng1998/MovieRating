@@ -135,6 +135,9 @@
         .recScoreLabel{
             color: #ffb400;
         }
+        .recNameLabel{
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -367,7 +370,7 @@
                 <div class="col-md-1 numLabel" th:text="${movieStat.index + 1 + '. '}">
                 </div>
                 <div class="col-md-10">
-                    <span class="recNameLabel" th:text="${movie.name}">超时空同居</span>&nbsp;&nbsp;<span class="recScoreLabel" th:text="${movie.rating}">9.6</span>
+                    <span class="recNameLabel" th:id="${movie.id}" th:text="${movie.name}">超时空同居</span>&nbsp;&nbsp;<span class="recScoreLabel" th:text="${movie.rating}">9.6</span>
                 </div>
             </div>
         </div>

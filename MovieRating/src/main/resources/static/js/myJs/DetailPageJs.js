@@ -32,4 +32,8 @@ $(function () {
         maoyanComment.addClass("disappear");
         mtimeComment.removeClass("disappear");
     });
+
+    $(".recNameLabel").click(function () {
+        window.location.href = getContextPath() + "/detail?id=" + $(this).attr("id");
+    })
 });
