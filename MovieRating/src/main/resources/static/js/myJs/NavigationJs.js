@@ -6,6 +6,9 @@ $(function () {
     $("#home").click(function () {
         window.location.href = getContextPath() + "/welcome";
     });
+    $("#backToTop").click(function () {
+        $(document).scrollTop(0);
+    });
     //滚动到最底部
     $("#aboutUs").click(function(){
         // var scrollHeight = $(document).prop("scrollHeight");
