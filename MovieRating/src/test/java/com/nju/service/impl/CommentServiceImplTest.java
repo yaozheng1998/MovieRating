@@ -25,6 +25,7 @@ public class CommentServiceImplTest {
     public void loadAllComments() throws Exception {
         List<Comment> comments = commentService.loadAllComments(2);
         System.out.println(comments.size());
+        System.out.println(comments.get(0).getFrom());
     }
 
     @Test

@@ -7,7 +7,7 @@
             <xsl:for-each select="/comments/mTimeComment">
                 <comment>
 
-                    <from>1</from>
+                    <from>时光网</from>
                     <user>
                         <xsl:value-of select="ca"/>
                     </user>
