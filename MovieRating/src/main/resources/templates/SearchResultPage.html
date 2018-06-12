@@ -29,6 +29,9 @@
         #titleBlock .score{
             color: #ffb400;
         }
+        .searchImage, .searchName{
+            cursor: pointer;
+        }
 
     </style>
 </head>
@@ -68,11 +71,11 @@
             <div class="row resultItem" th:each="result : ${searchResults}">
                 <div th:class="${resultStat.index}?'col-md-12 hr':''"></div>
                 <div class="col-md-3">
-                    <img class="rounded" th:src="${result.image}" alt/>
+                    <img class="rounded searchImage" th:src="${result.image}" alt th:id="${result.id}"/>
                 </div>
                 <div class="col-md-8" id="titleBlock">
                     <!--要放置的条目：影片名、英文名、类型、国家/地区、时长、上映时间、导演、编剧、主演、-->
-                    <h5><span th:text="${result.name}"></span></h5>
+                    <h5><span class="searchName" th:text="${result.name}" th:id="${'name' + result.id}"></span></h5>
                     <h6><span th:text="${result.byname}"></h6>
                     <h6>评分：<span class="score" th:text="${result.doubanRating}"></span>（豆瓣） <span class="score" th:text="${result.maoyanRating}"></span>（猫眼） <span class="score" th:text="${result.mTimeRating}"></span>（时光网）</h6>
                     <h6><span th:text="${result.genres}"></span></h6>
@@ -159,4 +162,5 @@
 <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script th:src="@{/js/myJs/UtilJs.js}"></script>
 <script th:src="@{/js/myJs/NavigationJs.js}"></script>
+<script th:src="@{/js/myJs/SearchResultPageJs.js}"></script>
 </html>
