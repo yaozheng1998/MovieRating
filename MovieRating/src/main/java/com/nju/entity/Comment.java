@@ -16,6 +16,13 @@ public class Comment {
     private int thumb;      // 点赞数
     private double rate;    // 该评论给电影的评分
 
-
-
+    public Comment(String from, String user, String avatar, String date, String content, int thumb, double rate) {
+        this.from = from;
+        this.user = user;
+        this.avatar = avatar;
+        this.date = date;
+        this.content = content;
+        this.thumb = thumb;
+        this.rate = rate;
+    }
 }

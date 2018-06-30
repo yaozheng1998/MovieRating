@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
     <link rel="stylesheet" th:href="@{/css/bootstrap-4.0.0/dist/css/bootstrap.min.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/customCSS/commonCSS.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/customCSS/LoginModalCSS.css}" type="text/css"/>
     <style type="text/css">
         #resultsList{
             margin-top: 1rem;
@@ -56,7 +57,9 @@
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" placeholder="Search" id="searchInput" autocomplete="off">
-            <button class="btn btn-outline-info my-2 my-sm-0" type="button" id="searchButton">Search</button>
+            <button class="btn btn-outline-info my-2 my-sm-0" type="button" id="searchButton">搜索</button>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="loginModalButton" data-target="#loginModal" data-toggle="modal">登录</button>
+            <button class="btn btn-outline-success my-2 my-sm-0 disappear" type="button" id="personalCenterButton">个人中心</button>
         </form>
     </div>
 </nav>
@@ -153,6 +156,26 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="wrapper">
+                <div class="login">
+                    <p class="title">Log in</p>
+                    <input type="text" placeholder="Username" autofocus id="usernameField"/>
+                    <i class="fa fa-user"></i>
+                    <input type="password" placeholder="Password" id="passwordField"/>
+                    <i class="fa fa-key"></i>
+                    <a href="#">Forgot your password?</a>
+                    <button class="loginButton">
+                        <span class="loginButton">Log in</span>
+                    </button>
+                </div>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <script th:src="@{/js/jQuery/jquery-3.2.1.min.js}"></script>
 <!--<script th:src="@{/css/bootstrap-4.0.0/assets/js/vendor/popper.min.js}"></script>-->
@@ -162,5 +185,6 @@
 <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script th:src="@{/js/myJs/UtilJs.js}"></script>
 <script th:src="@{/js/myJs/NavigationJs.js}"></script>
+<script th:src="@{/js/myJs/LoginJs.js}"></script>
 <script th:src="@{/js/myJs/SearchResultPageJs.js}"></script>
 </html>

@@ -36,3 +36,8 @@
 .disappear{
     display: none;
 }
+
+/*导航栏样式*/
+#searchButton{
+    margin-right: 20px;
+}
