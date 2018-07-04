@@ -66,10 +66,10 @@ public class MTimeDataSpider {
         for (int i = 0; i < ms.size(); i++) {
             JsonObject subObject = ms.get(i).getAsJsonObject();
             MTime mTime = new MTime();
-            mTime.setMovieId(subObject.get("id").getAsInt());
-            mTime.setMovieName(subObject.get("tCn").getAsString());
-            mTime.setRate(subObject.get("r").getAsDouble());
-            mTimeDao.save(mTime);
+//            mTime.setMovieId(subObject.get("id").getAsInt());
+//            mTime.setMovieName(subObject.get("tCn").getAsString());
+//            mTime.setRate(subObject.get("r").getAsDouble());
+//            mTimeDao.save(mTime);
             System.out.println(mTime);
         }
     }
