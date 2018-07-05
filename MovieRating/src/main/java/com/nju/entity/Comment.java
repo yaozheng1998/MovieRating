@@ -8,13 +8,17 @@ import lombok.Data;
 @Data
 public class Comment {
 
-    private String from;     
+    private String from;
     private String user;    // 用户名
     private String avatar;      // 用户头像
     private String date; // 评论时间
     private String content; // 评论内容
     private int thumb;      // 点赞数
     private double rate;    // 该评论给电影的评分
+
+    public Comment() {
+
+    }
 
     public Comment(String from, String user, String avatar, String date, String content, int thumb, double rate) {
         this.from = from;
@@ -25,4 +29,6 @@ public class Comment {
         this.thumb = thumb;
         this.rate = rate;
     }
+
+
 }

@@ -15,4 +15,6 @@ public interface DoubanCommentDao extends JpaRepository<DoubanComment, Integer> 
 
     @Query(value = "select c from DoubanComment c, Movie m where c.doubanId = m.doubanId and m.id = ?1")
     List<DoubanComment> findAllByCommonId(Integer id);
+
+    List<DoubanComment> findByName(String username);
 }
