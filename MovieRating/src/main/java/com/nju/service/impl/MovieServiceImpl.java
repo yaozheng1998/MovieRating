@@ -1,6 +1,6 @@
 package com.nju.service.impl;
 
-import com.nju.dao.*;
+import com.nju.dao.MovieDao;
 import com.nju.entity.Movie;
 import com.nju.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class MovieServiceImpl implements MovieService {
     private MovieDao movieDao;
 
     @Autowired
-    public MovieServiceImpl(MovieDao movieDao){
+    public MovieServiceImpl(MovieDao movieDao) {
         this.movieDao = movieDao;
     }
 
