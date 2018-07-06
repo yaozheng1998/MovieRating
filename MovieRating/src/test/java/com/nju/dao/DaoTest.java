@@ -1,4 +1,4 @@
-package com.nju.service.impl;
+package com.nju.dao;
 
 import com.nju.IntegrationApplication;
 import com.nju.dao.MTimeScoreDao;

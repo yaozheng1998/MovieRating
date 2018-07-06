@@ -31,5 +31,6 @@ public class Movie {
     private double mTimeRating;    // 时光评分
     private double maoyanRating;    // 猫眼评分
     private double rating;      // 综合评分 三者取平均
+    private String tag;      // 标签
 
 }

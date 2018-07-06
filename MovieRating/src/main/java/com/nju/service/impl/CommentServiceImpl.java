@@ -8,7 +8,7 @@ import com.nju.entity.MTimeComment;
 import com.nju.entity.MaoYanComment;
 import com.nju.entity.Comment;
 import com.nju.service.CommentService;
-import com.nju.util.XmlUtil;
+import com.nju.datautil.XmlUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

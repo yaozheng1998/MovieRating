@@ -1,4 +1,4 @@
-package com.nju.util;
+package com.nju.datautil;
 
 
 import com.nju.entity.*;
@@ -18,9 +18,9 @@ import java.util.List;
  */
 public class XmlUtil {
 
-    public static final String DOUBAN_COMMENT_XSLT = "src/main/resources/doubanTrans.xslt";
-    public static final String MAOYAN_COMMENT_XSLT = "src/main/resources/maoyanTrans.xslt";
-    public static final String MTIME_COMMENT_XSLT = "src/main/resources/mtimeTrans.xslt";
+    public static final String DOUBAN_COMMENT_XSLT = "MovieRating/src/main/resources/doubanTrans.xslt";
+    public static final String MAOYAN_COMMENT_XSLT = "MovieRating/src/main/resources/maoyanTrans.xslt";
+    public static final String MTIME_COMMENT_XSLT = "MovieRating/src/main/resources/mtimeTrans.xslt";
 
     private static TransformerFactory tf = TransformerFactory.newInstance();
 

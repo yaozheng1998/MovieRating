@@ -3,10 +3,6 @@ package com.nju.datautil;
 import com.hankcs.hanlp.HanLP;
 import java.util.List;
 
-/**
- * @Author YZ
- * @Date 30/06/2018
- */
 public class ProcessWords {
     //对豆瓣中的评论进行分词，1、选取关键词；2、进行情感分析，褒贬；存放进数据库
     public static void main(String[]args){

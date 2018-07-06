@@ -31,12 +31,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Movie> getRecommendedMovies(String username) {
-
-        return null;
-    }
-
-    @Override
     public List<Movie> getLikeMovies(String username) {
 
         User user = userDao.findByUsername(username);

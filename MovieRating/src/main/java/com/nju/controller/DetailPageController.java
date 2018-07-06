@@ -77,7 +77,6 @@ public class DetailPageController {
      * @param rate 评论评分
      * @param mid 电影id
      * @param httpSession 获取用户名
-     * @return
      */
     @RequestMapping(value = "submitComment", method = RequestMethod.POST)
     @ResponseBody

@@ -14,15 +14,6 @@ public interface UserService {
      */
     User getUserData(String username);
 
-
-    /**
-     * 获取给该用户推荐的电影列表
-     * @param username 用户id
-     * @return 推荐给该用户的电影列表
-     */
-    List<Movie> getRecommendedMovies(String username);
-
-
     /**
      * 获取该用户收藏喜欢过的电影列表
      * @param username 用户id

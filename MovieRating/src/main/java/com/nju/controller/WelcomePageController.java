@@ -14,6 +14,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/welcome")
 public class WelcomePageController {
+
     @Autowired
     private MovieService movieService;
 

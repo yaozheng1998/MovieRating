@@ -14,6 +14,7 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/search")
 public class SearchPageController {
+
     @Autowired
     private MovieService movieService;
 

@@ -3,6 +3,7 @@ package com.nju.controller;
 import com.nju.entity.Comment;
 import com.nju.entity.Movie;
 import com.nju.entity.User;
+import com.nju.service.RecommendService;
 import com.nju.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,9 @@ public class PersonalCenterPageController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RecommendService recommendService;
+
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     public String visit(Model model,HttpSession httpSession){
@@ -28,7 +32,7 @@ public class PersonalCenterPageController {
         User user = userService.getUserData(username);
 //        填充用户数据：用户头像、用户名
         //获取推荐给用户的电影，按相关性排序
-        List<Movie> recommendedMovieList = userService.getRecommendedMovies(username);
+        List<Movie> recommendedMovieList = recommendService.getRecommendedMovies(username);
         List<Movie> likeMovieList = userService.getLikeMovies(username);
         List<Comment> myComments = userService.getMyComments(username);
 
