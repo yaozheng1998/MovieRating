@@ -30,6 +30,11 @@ public class DaoTest {
     @Autowired
     private MTimeScoreDao mTimeScoreDao;
 
+
+    @Test
+    public void test() throws Exception {
+    }
+
     @Test
     public void test1() throws Exception {
         List<MTime> mTimes = mTimeScoreDao.findAll();

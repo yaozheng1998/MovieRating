@@ -10,5 +10,11 @@ public interface RecommendConfig {
      double CONTENT_BASE_RATIO = 0.5;
      double ITEM_CF_RATIO = 0.5;
 
-     // 基于内容计算相似度时候 在用户所打的标签所占的整体的比重
+     // 推荐的数量
+     int RECOMMEND_SIZE = 5;
+     // 热门电影的数量
+     int HOT_SIZE = 5;
+
+
+
 }

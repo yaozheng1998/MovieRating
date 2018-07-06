@@ -16,11 +16,11 @@ public interface RecommendService {
     /**
      * 用户喜欢推荐的电影 更新用户喜欢的电影列表
      */
-    void likeRecommend(Movie movie, String username);
+    void likeRecommend(Movie movie, String userId);
 
     /**
      * 用户不喜欢推荐的电影 更新用户不喜欢的电影列表
      */
-    void dislikeRecommend(Movie movie, String username);
+    void dislikeRecommend(Movie movie, String userId);
 
 }

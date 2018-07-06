@@ -4,8 +4,10 @@ import com.hankcs.hanlp.mining.word2vec.DocVectorModel;
 import com.nju.IntegrationApplication;
 import com.nju.dao.MovieDao;
 import com.nju.dao.UserDao;
+import com.nju.entity.HotMovie;
 import com.nju.entity.Movie;
 import com.nju.entity.User;
+import com.nju.recommend.HotMovieCalculation;
 import com.nju.recommend.SimilarityCalculation;
 import com.nju.recommend.WordModelFactory;
 import org.junit.Test;
@@ -35,9 +37,13 @@ public class RecommendTest {
     @Autowired
     SimilarityCalculation similarityCalculation;
 
+    @Autowired
+    HotMovieCalculation hotMovieCalculation;
+
     @Test
     public void test() {
-        System.out.println(similarityCalculation.getSimilarityMatrix()[0][1]);
+//        hotMovieCalculation.calculate();
+        similarityCalculation.getSimilarityMatrix();
     }
 
     @Test
@@ -59,11 +65,11 @@ public class RecommendTest {
 
         List<User> users = userDao.findAll();
         for (User user : users) {
-            if (user.getLikes().isEmpty() && user.getCollected().isEmpty()) continue;
+            if (StringUtil.isEmpty(user.getLikes()) && StringUtil.isEmpty(user.getCollected())) continue;
 
             // 将收藏电影和喜欢的电影拼接
-            String temp = (user.getLikes().isEmpty() ? "" : user.getLikes()) + ","
-                    + (user.getCollected().isEmpty() ? "" : user.getCollected());
+            String temp = (StringUtil.isEmpty(user.getLikes()) ? "" : user.getLikes()) + ","
+                    + (StringUtil.isEmpty(user.getCollected()) ? "" : user.getCollected());
 
             String[] likes = temp.split(",");
             for (int i = 0; i < likes.length; ++i) {

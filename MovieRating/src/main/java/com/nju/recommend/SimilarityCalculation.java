@@ -4,17 +4,22 @@ import com.hankcs.hanlp.mining.word2vec.DocVectorModel;
 import com.nju.dao.MovieDao;
 import com.nju.dao.UserDao;
 import com.nju.datautil.IOUtil;
+import com.nju.datautil.StringUtil;
 import com.nju.entity.Movie;
 import com.nju.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
 /**
+ * 相似度计算的任务
  * create by stephen on 2018/7/6
  */
 @Component
+@Transactional
 public class SimilarityCalculation {
 
     private MovieDao movieDao;
@@ -34,7 +39,11 @@ public class SimilarityCalculation {
         return IOUtil.readArrayFromFile(RecommendConfig.SIMILARITY_FILE);
     }
 
-    private void calculate() {
+    /**
+     * 每天两天更新一次相似度矩阵
+     */
+    @Scheduled(cron = "0 0 2 * * ?")
+    public void calculate() {
         List<Movie> movies = movieDao.findAll();
         double[][] similarityMatrix = new double[movies.size()][movies.size()];
         for (double[] doubles : similarityMatrix) {
@@ -44,7 +53,6 @@ public class SimilarityCalculation {
         itemCFCalculate(similarityMatrix, movies);
         IOUtil.saveArrayToFile(similarityMatrix, RecommendConfig.SIMILARITY_FILE);
     }
-
 
 
     /**
@@ -62,11 +70,11 @@ public class SimilarityCalculation {
 
         List<User> users = userDao.findAll();
         for (User user : users) {
-            if (user.getLikes().isEmpty() && user.getCollected().isEmpty()) continue;
+            if (StringUtil.isEmpty(user.getLikes()) && StringUtil.isEmpty(user.getCollected())) continue;
 
             // 将收藏电影和喜欢的电影拼接
-            String temp = (user.getLikes().isEmpty() ? "" : user.getLikes()) + ","
-                    + (user.getCollected().isEmpty() ? "" : user.getCollected());
+            String temp = (StringUtil.isEmpty(user.getLikes()) ? "" : user.getLikes()) + ","
+                    + (StringUtil.isEmpty(user.getCollected()) ? "" : user.getCollected());
 
             String[] likes = temp.split(",");
             for (int i = 0; i < likes.length; ++i) {
@@ -82,6 +90,16 @@ public class SimilarityCalculation {
                 }
             }
         }
+
+        for (int i = 0; i < movies.size(); ++i) {
+            for (int j = 0; j < movies.size(); ++j) {
+                if (i == j) similarityMatrix[i][j] = 0;     // 忽略同一个电影相似度
+                if (similarityMatrix[i][j] == 0) continue;
+                similarityMatrix[i][j] = (similarityMatrix[i][j] *RecommendConfig.CONTENT_BASE_RATIO)
+                        / Math.sqrt(likeSum[i] * likeSum[j]);
+            }
+        }
+
     }
 
     /**
@@ -93,8 +111,14 @@ public class SimilarityCalculation {
         for (int i = 0; i < movies.size(); ++i) {
             for (int j = 0; j < movies.size(); ++j) {
                 if (i != j && similarityMatrix[i][j] == 0) {
-                    double temp = docVectorModel.similarity(movies.get(i).getTag().replace(",", ""),
-                            movies.get(j).getTag().replace(",", ""));
+                    // 加上电影类别
+                    String a =(movies.get(i).getTag() + movies.get(i).getGenres())
+                            .replace(",", "")
+                            .replace(" ", "");
+                    String b =(movies.get(j).getTag() + movies.get(j).getGenres())
+                            .replace(",", "")
+                            .replace(" ", "");
+                    double temp = docVectorModel.similarity(a,b);
                     similarityMatrix[i][j] += temp * RecommendConfig.ITEM_CF_RATIO;
                 }
             }
