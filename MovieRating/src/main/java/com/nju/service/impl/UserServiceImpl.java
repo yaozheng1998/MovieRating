@@ -27,15 +27,15 @@ public class UserServiceImpl implements UserService {
     MovieDao movieDao;
 
     @Override
-    public User getUserData(String username) {
+    public User getUserData(String userId) {
 
-        return userDao.findByUsername(username);
+        return userDao.findByUserId(userId);
     }
 
     @Override
-    public List<Movie> getLikeMovies(String username) {
+    public List<Movie> getLikeMovies(String userId) {
 
-        User user = userDao.findByUsername(username);
+        User user = userDao.findByUserId(userId);
         String[] likes = user.getLikes().split(",");
         List<Integer> movieId = new ArrayList<>();
         for (int i = 0; i < likes.length; i++) {
@@ -47,9 +47,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Comment> getMyComments(String username) {
+    public List<Comment> getMyComments(String userId) {
 
-        List<DoubanComment> doubanComments = doubanCommentDao.findByName(username);
+        List<DoubanComment> doubanComments = doubanCommentDao.findByName(userId);
         List<Comment> comments = new ArrayList<>();
         for (int i = 0; i < doubanComments.size(); i++) {
             Comment comment = new Comment();
@@ -58,9 +58,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean likeOrUnlike(String username, int mid) {
+    public boolean likeOrUnlike(String userId, int mid) {
 
-        User user = userDao.findByUsername(username);
+        User user = userDao.findByUserId(userId);
 
         if (user == null) {
             return false;
@@ -91,14 +91,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean writeComment(String username, int mid, Comment comment) {
-        User user = userDao.findByUsername(username);
+    public boolean writeComment(String userId, int mid, Comment comment) {
+        User user = userDao.findByUserId(userId);
         DoubanComment doubanComment = new DoubanComment();
         doubanComment.setDoubanId(mid);
         doubanComment.setUid(user.getUserId());
         doubanComment.setAvatar(comment.getAvatar());
         doubanComment.setSignature(user.getSignature());
-        doubanComment.setName(username);
+        doubanComment.setName(userId);
         doubanComment.setContent(comment.getContent());
         doubanComment.setCreate_at(comment.getDate());
         doubanComment.setRating((int) comment.getRate());
