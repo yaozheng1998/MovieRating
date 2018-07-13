@@ -1,9 +1,12 @@
 package com.nju.datautil;
 
 
-import com.nju.entity.*;
 import com.nju.entity.Comment;
+import com.nju.entity.DoubanComment;
+import com.nju.entity.MTimeComment;
+import com.nju.entity.MaoYanComment;
 import com.thoughtworks.xstream.XStream;
+import org.springframework.util.ResourceUtils;
 
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -18,28 +21,29 @@ import java.util.List;
  */
 public class XmlUtil {
 
-    public static final String DOUBAN_COMMENT_XSLT = "MovieRating/src/main/resources/doubanTrans.xslt";
-    public static final String MAOYAN_COMMENT_XSLT = "MovieRating/src/main/resources/maoyanTrans.xslt";
-    public static final String MTIME_COMMENT_XSLT = "MovieRating/src/main/resources/mtimeTrans.xslt";
+    public static final String DOUBAN_COMMENT_XSLT = ResourceUtils.CLASSPATH_URL_PREFIX + "doubanTrans.xslt";
+    //    public static final String DOUBAN_COMMENT_XSLT = "MovieRating/src/main/resources/doubanTrans.xslt";
+    public static final String MAOYAN_COMMENT_XSLT = ResourceUtils.CLASSPATH_URL_PREFIX + "maoyanTrans.xslt";
+    public static final String MTIME_COMMENT_XSLT = ResourceUtils.CLASSPATH_URL_PREFIX + "mtimeTrans.xslt";
 
     private static TransformerFactory tf = TransformerFactory.newInstance();
 
 
     public static List<Comment> transMaoYan(List<MaoYanComment> maoYanComments) {
         String srcXml = XmlUtil.beanToXml(maoYanComments);
-        String targetXml = XmlUtil.transformXmlByXslt(srcXml,XmlUtil.MAOYAN_COMMENT_XSLT);
+        String targetXml = XmlUtil.transformXmlByXslt(srcXml, XmlUtil.MAOYAN_COMMENT_XSLT);
         return (List<Comment>) XmlUtil.xmlToBean(targetXml);
     }
 
     public static List<Comment> transMTime(List<MTimeComment> mTimeComments) {
         String srcXml = XmlUtil.beanToXml(mTimeComments);
-        String targetXml = XmlUtil.transformXmlByXslt(srcXml,XmlUtil.MTIME_COMMENT_XSLT);
+        String targetXml = XmlUtil.transformXmlByXslt(srcXml, XmlUtil.MTIME_COMMENT_XSLT);
         return (List<Comment>) XmlUtil.xmlToBean(targetXml);
     }
 
     public static List<Comment> transDouban(List<DoubanComment> doubanComments) {
         String srcXml = XmlUtil.beanToXml(doubanComments);
-        String targetXml = XmlUtil.transformXmlByXslt(srcXml,XmlUtil.DOUBAN_COMMENT_XSLT);
+        String targetXml = XmlUtil.transformXmlByXslt(srcXml, XmlUtil.DOUBAN_COMMENT_XSLT);
         return (List<Comment>) XmlUtil.xmlToBean(targetXml);
     }
 
