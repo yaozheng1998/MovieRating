@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -47,14 +49,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<Comment> getMyComments(String userId) {
+    public Map<Movie, List<Comment>> getMyComments(String userId) {
 
         List<DoubanComment> doubanComments = doubanCommentDao.findByName(userId);
-        List<Comment> comments = new ArrayList<>();
+        Map<Integer, List<Comment>> movieComments = new HashMap<>();
+
+        //对Comment进行分类，按Movie的Id放入map
         for (int i = 0; i < doubanComments.size(); i++) {
+            DoubanComment douban = doubanComments.get(i);
             Comment comment = new Comment();
+            trans(doubanComments.get(i), comment);
+            if (movieComments.containsKey(douban.getDoubanId())) {
+                List<Comment> comments = movieComments.get(douban.getDoubanId());
+                comments.add(comment);
+            } else {
+                List<Comment> comments = new ArrayList<>();
+                comments.add(comment);
+                movieComments.put(douban.getDoubanId(), comments);
+            }
         }
-        return null;
+
+        //将上一步的map转换成Map<Movie, List<Comment>>
+        Map<Movie, List<Comment>> result = new HashMap<>();
+        for (Map.Entry<Integer, List<Comment>> entry : movieComments.entrySet()) {
+            result.put(movieDao.getOne(entry.getKey()), entry.getValue());
+        }
+
+        return result;
     }
 
     @Override
@@ -108,5 +129,16 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    private void trans(DoubanComment douban, Comment comment) {
+
+        comment.setUser(douban.getUid());
+        comment.setAvatar(douban.getAvatar());
+        comment.setDate(douban.getCreate_at());
+        comment.setContent(douban.getContent());
+        comment.setThumb(0);
+        comment.setRate(douban.getRating());
+
     }
 }

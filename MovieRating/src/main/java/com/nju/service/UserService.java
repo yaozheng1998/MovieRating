@@ -5,6 +5,7 @@ import com.nju.entity.Movie;
 import com.nju.entity.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserService {
     /**
@@ -29,7 +30,7 @@ public interface UserService {
      * @param userId
      * @return 该用户所有评论的列表
      */
-    List<Comment> getMyComments(String userId);
+    Map<Movie, List<Comment>> getMyComments(String userId);
 
     /**
      * 收藏或取消收藏某部电影
