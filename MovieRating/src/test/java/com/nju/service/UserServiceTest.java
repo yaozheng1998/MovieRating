@@ -51,5 +51,7 @@ public class UserServiceTest {
         userService.likeOrUnlike(username, mid);
     }
 
-
+    @Test
+    public void testGetComments() throws Exception {
+    }
 }

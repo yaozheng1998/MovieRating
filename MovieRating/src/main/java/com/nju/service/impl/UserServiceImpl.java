@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
             return new ArrayList<>();
         }
 
-        String like = user.getLikes();
+        String like = user.getCollected();
 
         if (like == null || like.equals("")) {
             return new ArrayList<>();
