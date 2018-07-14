@@ -53,25 +53,6 @@ public class DetailPageController {
         return "DetailPage";
     }
 
-    /**
-     * 收藏某部电影
-     * 先要检查用户是否登录，如果没登录，先要让用户登录
-     * @param mid 电影id
-     * @param httpSession 获取用户名
-     * @return
-     */
-    @RequestMapping(value = "/like", method = RequestMethod.GET)
-    @ResponseBody
-    public boolean like(@RequestParam("mid")int mid, HttpSession httpSession){
-        String username = (String)httpSession.getAttribute("username");
-        if(username == null){
-            return false;
-        }else{
-            //这里的收藏和取消收藏用的是一个方法
-            boolean result = userService.likeOrUnlike(username, mid);
-            return result;
-        }
-    }
 
     /**
      * 评论某部电影
@@ -98,7 +79,7 @@ public class DetailPageController {
             String date = formatter.format(new Date());// 评论时间
             int thumb = 0;      // 点赞数
             Comment comment = new Comment(from,userID,avatar,date,content,thumb,rate);
-            System.out.println("submitComment");
+
             boolean result = userService.writeComment(userID, mid, comment);
             return result;
         }
@@ -133,16 +114,34 @@ public class DetailPageController {
     @ResponseBody
     public boolean movieLikedOrNot(@RequestParam("mid")int mid, HttpSession httpSession){
         String userID = (String) httpSession.getAttribute("userID");
-        System.out.println("mid: "+ mid);
+//        System.out.println("mid: "+ mid);
         List<Movie> movieList = userService.getLikeMovies(userID);
-        Movie movie = movieService.loadMovie(mid);
 
-        if(movieList.contains(movie)){
-            return true;
-        }else{
-            return false;
+        System.out.println("size : " + movieList.size());
+        for(Movie movie1:movieList){
+            if(movie1.getId() == mid){
+                System.out.println("movie1: mid : " + movie1.getId());
+                return true;
+            }
         }
 
+        return false;
+
+    }
+
+
+    /**
+     * 评论某部电影
+     * 先要检查用户是否登录，如果没登录，先要让用户登录
+     * @param commentId 评论ID
+     * @param httpSession 获取用户名
+     */
+    @RequestMapping(value = "/deleteComment", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean deleteComment(@RequestParam("commentID")int commentId,
+                                 HttpSession httpSession){
+        String userID = (String)httpSession.getAttribute("userID");    // 用户名
+        return userService.deleteComment(userID, commentId);
     }
 
 

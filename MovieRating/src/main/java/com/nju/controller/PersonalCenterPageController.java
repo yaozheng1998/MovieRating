@@ -34,12 +34,12 @@ public class PersonalCenterPageController {
         //获取推荐给用户的电影，按相关性排序
         List<Movie> recommendedMovieList = recommendService.getRecommendedMovies(userID);
         List<Movie> likeMovieList = userService.getLikeMovies(userID);
-//        Map<Movie, List<Comment>> movieListMap = userService.getMyComments(userID);
+        Map<Movie, List<Comment>> movieAndComments = userService.getMyComments(userID);
 
         model.addAttribute("user", user);
         model.addAttribute("recommendedMovieList",recommendedMovieList);
         model.addAttribute("likeMovieList", likeMovieList);
-//        model.addAttribute("myComments",myComments);
+        model.addAttribute("movieAndComments", movieAndComments);
         return "PersonalCenterPage";
     }
 

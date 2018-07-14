@@ -20,6 +20,7 @@ $(function () {
                         $("#loginModalButton").addClass("disappear");
                         $("#personalCenterButton").removeClass("disappear");
                         $("#loginModal").modal("hide");
+                        window.location.reload();
                     }else{
                         window.alert("用户名或密码错误!");
                     }

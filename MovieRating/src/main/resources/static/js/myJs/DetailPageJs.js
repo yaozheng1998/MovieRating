@@ -53,6 +53,7 @@ $(function () {
                         if(data){
                             $("#dislikeBtn").addClass("disappear");
                             $("#likeBtn").removeClass("disappear");
+                            console.log("已收藏");
                         }
                     },
                     error: function (error) {
@@ -81,8 +82,9 @@ $(function () {
             data: movie,
             success: function (data) {
                 if(data){
-                    $(this).addClass("disappear");
+                    $("#dislikeBtn").addClass("disappear");
                     $("#likeBtn").removeClass("disappear");
+                    console.log("收藏成功!");
                 }else{
                 //    没有用户在线
                     window.alert("请先登录！");
@@ -107,8 +109,9 @@ $(function () {
             data: movie,
             success: function (data) {
                 if(data){
-                    $(this).addClass("disappear");
+                    $("#likeBtn").addClass("disappear");
                     $("#dislikeBtn").removeClass("disappear");
+                    console.log("取消收藏!");
                 }else{
                     //    没有用户在线
                     window.alert("请先登录！");
@@ -129,22 +132,29 @@ $(function () {
         comment.rate = rate;
         comment.mid = $(".movieName").attr("id");
         console.log("content:" + content + ", rate:" + rate);
-        $.ajax({
-            type: 'post',
-            url: getContextPath() + "/detail/submitComment",
-            data: comment,
-            success: function (data) {
-                if(data){
-                    window.alert("评论提交成功!");
+        if(content !== ""){
+            $.ajax({
+                type: 'post',
+                url: getContextPath() + "/detail/submitComment",
+                data: comment,
+                success: function (data) {
+                    if(data){
+                        window.alert("评论提交成功!");
+                        $("#commentTextarea").val("");
+                        $("#rateField").val(0);
 
-                }else{
-                    window.alert("请先登录！")
+                    }else{
+                        window.alert("请先登录！")
+                    }
+                },
+                error: function (error) {
+
+                    console.log(error);
                 }
-            },
-            error: function (error) {
+            });
+        }else{
+            window.alert("请填写评论后再提交！");
+        }
 
-                console.log(error);
-            }
-        });
     })
 });
