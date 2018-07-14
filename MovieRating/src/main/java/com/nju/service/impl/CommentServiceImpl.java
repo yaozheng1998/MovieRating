@@ -3,10 +3,8 @@ package com.nju.service.impl;
 import com.nju.dao.DoubanCommentDao;
 import com.nju.dao.MTimeCommentDao;
 import com.nju.dao.MaoYanCommentDao;
-import com.nju.entity.DoubanComment;
-import com.nju.entity.MTimeComment;
-import com.nju.entity.MaoYanComment;
-import com.nju.entity.Comment;
+import com.nju.dao.MovieDao;
+import com.nju.entity.*;
 import com.nju.service.CommentService;
 import com.nju.datautil.XmlUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,21 +23,25 @@ public class CommentServiceImpl implements CommentService {
     private DoubanCommentDao doubanCommentDao;
     private MaoYanCommentDao maoYanCommentDao;
     private MTimeCommentDao mTimeCommentDao;
+    private MovieDao movieDao;
 
     @Autowired
-    public CommentServiceImpl(DoubanCommentDao doubanCommentDao,
-                              MaoYanCommentDao maoYanCommentDao,
-                              MTimeCommentDao mTimeCommentDao) {
+    public CommentServiceImpl(DoubanCommentDao doubanCommentDao, MaoYanCommentDao maoYanCommentDao, MTimeCommentDao mTimeCommentDao, MovieDao movieDao) {
         this.doubanCommentDao = doubanCommentDao;
         this.maoYanCommentDao = maoYanCommentDao;
         this.mTimeCommentDao = mTimeCommentDao;
+        this.movieDao = movieDao;
     }
 
     @Override
     public List<Comment> loadAllComments(int movieId) {
-        List<Comment> doubanComment = loadCommentsFromDouban(movieId);
-        List<Comment> maoyanComment = loadCommentsFromMaoyan(movieId);
-        List<Comment> mtimeComment = loadCommentsFromTime(movieId);
+
+        Movie movie = movieDao.getOne(movieId);
+        int doubanMovieId = movie.getDoubanId();
+
+        List<Comment> doubanComment = loadCommentsFromDouban(doubanMovieId);
+        List<Comment> maoyanComment = loadCommentsFromMaoyan(doubanMovieId);
+        List<Comment> mtimeComment = loadCommentsFromTime(doubanMovieId);
 
         mtimeComment.addAll(maoyanComment);
         mtimeComment.addAll(doubanComment);
