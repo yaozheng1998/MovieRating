@@ -28,7 +28,6 @@ public class XmlUtil {
 
     private static TransformerFactory tf = TransformerFactory.newInstance();
 
-
     public static List<Comment> transMaoYan(List<MaoYanComment> maoYanComments) {
         String srcXml = XmlUtil.beanToXml(maoYanComments);
         String targetXml = XmlUtil.transformXmlByXslt(srcXml, XmlUtil.MAOYAN_COMMENT_XSLT);

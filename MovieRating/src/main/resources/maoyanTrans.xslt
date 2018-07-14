@@ -7,6 +7,10 @@
             <xsl:for-each select="/comments/maoYanComment">
                 <comment>
 
+                    <id>
+                        <xsl:value-of select="id"/>
+                    </id>
+
                     <from>猫眼电影</from>
                     <user>
                         <xsl:value-of select="username"/>
