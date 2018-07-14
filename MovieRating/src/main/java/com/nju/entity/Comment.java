@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class Comment {
 
+    private int id;
     private String from;
     private String user;    // 用户名
     private String avatar;      // 用户头像

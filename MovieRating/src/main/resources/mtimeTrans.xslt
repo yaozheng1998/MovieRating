@@ -7,6 +7,10 @@
             <xsl:for-each select="/comments/mTimeComment">
                 <comment>
 
+                    <id>
+                        <xsl:value-of select="id"/>
+                    </id>
+
                     <from>时光网</from>
                     <user>
                         <xsl:value-of select="ca"/>
