@@ -47,11 +47,15 @@ public class UserServiceImpl implements UserService {
         }
 
         String[] likes = like.split(",");
-        List<Integer> movieId = new ArrayList<>();
+        List<Movie> movies = new ArrayList<>();
         for (int i = 0; i < likes.length; i++) {
-            movieId.add(Integer.parseInt(likes[i]));
+            Movie movie = movieDao.findByDoubanId(Integer.valueOf(likes[i]));
+            if (movie != null) {
+                movies.add(movieDao.findByDoubanId(Integer.valueOf(likes[i])));
+            } else {
+                System.out.println(likes[i]);
+            }
         }
-        List<Movie> movies = movieDao.findAllByDoubanId(movieId);
 
         return movies;
     }

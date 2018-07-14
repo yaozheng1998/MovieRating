@@ -14,4 +14,6 @@ public interface MovieDao extends JpaRepository<Movie, Integer> {
 
     List<Movie> findAllByDoubanId(Iterable<Integer> doubanIds);
 
+    Movie findByDoubanId(Integer doubanId);
+
 }
