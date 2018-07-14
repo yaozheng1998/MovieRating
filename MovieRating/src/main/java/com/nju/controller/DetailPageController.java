@@ -119,8 +119,8 @@ public class DetailPageController {
 
         System.out.println("size : " + movieList.size());
         for(Movie movie1:movieList){
-            if(movie1.getId() == mid){
-                System.out.println("movie1: mid : " + movie1.getId());
+            if(movie1.getDoubanId() == mid){
+                System.out.println("movie1: mid : " + movie1.getDoubanId());
                 return true;
             }
         }
@@ -138,7 +138,7 @@ public class DetailPageController {
      */
     @RequestMapping(value = "/deleteComment", method = RequestMethod.POST)
     @ResponseBody
-    public boolean deleteComment(@RequestParam("commentID")int commentId,
+    public boolean deleteComment(@RequestParam("commentId")int commentId,
                                  HttpSession httpSession){
         String userID = (String)httpSession.getAttribute("userID");    // 用户名
         return userService.deleteComment(userID, commentId);

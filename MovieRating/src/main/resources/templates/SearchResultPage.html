@@ -74,11 +74,11 @@
             <div class="row resultItem" th:each="result : ${searchResults}">
                 <div th:class="${resultStat.index}?'col-md-12 hr':''"></div>
                 <div class="col-md-3">
-                    <img class="rounded searchImage" th:src="${result.image}" alt th:id="${result.id}"/>
+                    <img class="rounded searchImage" th:src="${result.image}" alt th:id="${result.doubanId}"/>
                 </div>
                 <div class="col-md-8" id="titleBlock">
                     <!--要放置的条目：影片名、英文名、类型、国家/地区、时长、上映时间、导演、编剧、主演、-->
-                    <h5><span class="searchName" th:text="${result.name}" th:id="${'name' + result.id}"></span></h5>
+                    <h5><span class="searchName" th:text="${result.name}" th:id="${'name' + result.doubanId}"></span></h5>
                     <h6><span th:text="${result.byname}"></h6>
                     <h6>评分：<span class="score" th:text="${result.doubanRating}"></span>（豆瓣） <span class="score" th:text="${result.maoyanRating}"></span>（猫眼） <span class="score" th:text="${result.mTimeRating}"></span>（时光网）</h6>
                     <h6><span th:text="${result.genres}"></span></h6>

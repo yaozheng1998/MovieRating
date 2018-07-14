@@ -187,7 +187,7 @@
         </div>
         <div class="col-md-7" id="titleBlock">
             <!--要放置的条目：影片名、英文名、类型、国家/地区、时长、上映时间、导演、编剧、主演、-->
-            <h3 class="movieName" th:id="${movie.id}" th:text="${movie.name}"></h3>
+            <h3 class="movieName" th:id="${movie.doubanId}" th:text="${movie.name}"></h3>
             <h5 th:text="${movie.byname}"></h5>
             <h6 th:text="${movie.genres}"></h6>
             <h6 th:text="${movie.countries}"></h6>
@@ -407,7 +407,7 @@
                 <div class="col-md-1 numLabel" th:text="${movieStat.index + 1 + '. '}">
                 </div>
                 <div class="col-md-10">
-                    <span class="recNameLabel" th:id="${movie.id}" th:text="${movie.name}">超时空同居</span>&nbsp;&nbsp;<span class="recScoreLabel" th:text="${movie.rating}">9.6</span>
+                    <span class="recNameLabel" th:id="${movie.doubanId}" th:text="${movie.name}">超时空同居</span>&nbsp;&nbsp;<span class="recScoreLabel" th:text="${movie.rating}">9.6</span>
                 </div>
             </div>
         </div>

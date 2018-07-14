@@ -120,7 +120,7 @@ public class UserServiceImpl implements UserService {
         //将上一步的map转换成Map<Movie, List<Comment>>
         Map<Movie, List<Comment>> result = new HashMap<>();
         for (Map.Entry<Integer, List<Comment>> entry : movieComments.entrySet()) {
-            result.put(movieDao.getOne(entry.getKey()), entry.getValue());
+            result.put(movieDao.findByDoubanId(entry.getKey()), entry.getValue());
         }
 
         return result;
@@ -160,6 +160,7 @@ public class UserServiceImpl implements UserService {
 
     private void trans(DoubanComment douban, Comment comment) {
         comment.setUser(douban.getUid());
+        comment.setId(douban.getId());
         comment.setAvatar(douban.getAvatar());
         comment.setDate(douban.getCreate_at());
         comment.setContent(douban.getContent());

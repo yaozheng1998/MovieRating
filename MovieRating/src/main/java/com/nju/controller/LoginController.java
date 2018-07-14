@@ -40,4 +40,12 @@ public class LoginController {
         return httpSession.getAttribute("userID") != null;
     }
 
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/logout")
+    @ResponseBody
+    public boolean logout(HttpSession httpSession){
+        httpSession.removeAttribute("userId");
+        return true;
+    }
 }

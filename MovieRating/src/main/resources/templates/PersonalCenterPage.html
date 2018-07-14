@@ -132,10 +132,10 @@
         <div class="col-md-10 offset-1 pcMainBlock">
             <div class="row" style="padding: 20px 0 0 40px">
                 <div class="col-md-1">
-                    <img src="../../images/17785150.jpeg" style="width: 60px;">
+                    <img th:src="${user.avatar}" style="width: 60px;">
                 </div>
                 <div class="col-md-2 ">
-                    <h4 id="userID">xxxxxxxxxxxxxxxxxx</h4></div>
+                    <h4 id="userID" th:text="${user.username}"></h4></div>
             </div>
             <div class="hr"></div>
             <!--推荐的电影-->
@@ -152,7 +152,7 @@
                             <div class="hr"></div>
                         </div>
                         <div class=" card-row" th:each="movie : ${recommendedMovieList}">
-                            <div class="card" style="width: 160px;" >
+                            <div class="card" style="width: 160px;" th:id="${movie.doubanId}">
                                 <img class="card-img-top"  th:src="${movie.image}" alt="Card image cap" />
                                 <div class="card-body text-center">
                                     <h5 class="card-title text-center" th:text="${movie.name}">超时空同居</h5>
@@ -166,19 +166,16 @@
                             <h4>我收藏的电影</h4>
                             <div class="hr"></div>
                         </div>
-                        <div class=" card-row" >
-                            <div class=" card-row" th:each="movie : ${likeMovieList}">
-                                <div class="card" style="width: 160px;" th:id="${movie.id}">
-                                    <img class="card-img-top"  th:src="${movie.image}" alt="Card image cap" />
-                                    <div class="card-body text-center">
-                                        <h5 class="card-title text-center" th:text="${movie.name}">超时空同居</h5>
-                                        <p class="card-text text-center" th:text="${movie.rating}">8.6</p>
-                                        <img src="../../images/like.png" th:id="${movie.id}" style="width: 30px;">
-                                    </div>
+                        <div class="card-row" th:each="movie : ${likeMovieList}">
+                            <div class="card" style="width: 160px;" th:id="${movie.doubanId}">
+                                <img class="card-img-top"  th:src="${movie.image}" alt="Card image cap" />
+                                <div class="card-body text-center">
+                                    <h5 class="card-title text-center" th:text="${movie.name}">超时空同居</h5>
+                                    <p class="card-text text-center" th:text="${movie.rating}">8.6</p>
+
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="row blockBorder disappear" id="myComments">
                         <div class="col-md-12">
@@ -189,54 +186,29 @@
                             <div class="row" th:each="movieAndComments : ${movieAndCommentsList}">
                                 <div class="col-md-2">
                                     <div class="">
-                                        <div class="card" style="width: 160px;" >
-                                            <img class="card-img-top"  th:src="${movieAndComments.movie.image}" alt="Card image cap" />
+                                        <div class="card" style="width: 160px;min-height: 0;" th:id="${movieAndComments.key.doubanId}">
+                                            <img class="card-img-top"  th:src="${movieAndComments.key.image}"  alt="Card image cap" />
                                             <div class="card-body text-center">
-                                                <h5 class="card-title text-center" th:text="${movieAndComments.movie.name}">超时空同居</h5>
+                                                <h5 class="card-title text-center" th:text="${movieAndComments.key.name}">超时空同居</h5>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-10">
-                                    <div class="row myCommentBlockBorder">
+                                    <div class="row myCommentBlockBorder" th:each="comment : ${movieAndComments.value}">
                                         <!--要显示的内容：评论时间、评论内容-->
                                         <div class="col-md-12 text-left">
-                                            <span>无论片中的陆鸣怎么选，小焦都会过上衣食无忧的生活，她要么会有一个家财万贯的亲爹，要么会有一个亿万资产的“干爹”（结合片中两人的实际年龄和事实情况，大概就是这个意思吧）</span>
+                                            <span th:text="${comment.content}">无论片中的陆鸣怎么选，小焦都会过上衣食无忧的生活，她要么会有一个家财万贯的亲爹，要么会有一个亿万资产的“干爹”（结合片中两人的实际年龄和事实情况，大概就是这个意思吧）</span>
                                         </div>
                                         <div class="col-md-12 hr"></div>
-                                        <div class="col-md-10 text-right" style="margin-top: 8px;">
+                                        <div class="col-md-10 text-right" style="margin-top: 8px;" th:text="${comment.date}">
                                             2018-9-08
                                         </div>
                                         <div class="col-md-2">
-                                            <button type="button" class="btn btn-primary">删除评论</button>
+                                            <button type="button" class="btn btn-primary deleteCommentBtn" th:id="${comment.id}">删除评论</button>
                                         </div>
                                     </div>
-                                    <div class="row myCommentBlockBorder">
-                                        <!--要显示的内容：评论时间、评论内容-->
-                                        <div class="col-md-12 text-left">
-                                            <span>无论片中的陆鸣怎么选，小焦都会过上衣食无忧的生活，她要么会有一个家财万贯的亲爹，要么会有一个亿万资产的“干爹”（结合片中两人的实际年龄和事实情况，大概就是这个意思吧）</span>
-                                        </div>
-                                        <div class="col-md-12 hr"></div>
-                                        <div class="col-md-10 text-right" style="margin-top: 8px;">
-                                            2018-9-08
-                                        </div>
-                                        <div class="col-md-2">
-                                            <button type="button" class="btn btn-primary">删除评论</button>
-                                        </div>
-                                    </div>
-                                    <div class="row myCommentBlockBorder">
-                                        <!--要显示的内容：评论时间、评论内容-->
-                                        <div class="col-md-12 text-left">
-                                            <span>无论片中的陆鸣怎么选，小焦都会过上衣食无忧的生活，她要么会有一个家财万贯的亲爹，要么会有一个亿万资产的“干爹”（结合片中两人的实际年龄和事实情况，大概就是这个意思吧）</span>
-                                        </div>
-                                        <div class="col-md-12 hr"></div>
-                                        <div class="col-md-10 text-right" style="margin-top: 8px;">
-                                            2018-9-08
-                                        </div>
-                                        <div class="col-md-2">
-                                            <button type="button" class="btn btn-primary">删除评论</button>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -257,6 +229,7 @@
 <!--<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
 <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script th:src="@{/js/myJs/UtilJs.js}"></script>
+<script th:src="@{/js/myJs/LoginJs.js}"></script>
 <script th:src="@{/js/myJs/NavigationJs.js}"></script>
 <script th:src="@{/js/myJs/PersonalCenterPageJs.js}"></script>
 </html>

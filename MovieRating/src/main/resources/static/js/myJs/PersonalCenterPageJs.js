@@ -43,4 +43,30 @@ $(function () {
         likeFilmsBlock.addClass("disappear");
         commentsBlock.removeClass("disappear");
     })
+
+
+    //删除评论按钮
+    $(".deleteCommentBtn").click(function () {
+        var comment = {};
+        comment.commentId = $(this).attr("id");
+        $.ajax({
+            type: 'post',
+            url: getContextPath() + "/detail/deleteComment",
+            data: comment,
+            success: function (data) {
+                if(data){
+                    window.alert("删除评论成功!");
+                    window.location.reload();
+                }else{
+                    //    没有用户在线
+                    window.alert("删除失败，请稍后再试!");
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    })
+
+
 })

@@ -17,7 +17,7 @@
         }
         .card{
             margin: 0 auto;
-            min-height: 330px;
+            min-height: 3px;
         }
         .card img{
             cursor: pointer;
@@ -111,7 +111,7 @@
 
     <div class="row justify-content-start" id="content-holder">
         <div class="col-md-2 card-row" th:each="movie : ${moviesList}">
-            <div class="card" style="width: 160px;" th:id="${movie.id}">
+            <div class="card" style="width: 160px;" th:id="${movie.doubanId}">
                 <img class="card-img-top" th:src="${movie.image}" src="http://p0.meituan.net/movie/f193e43ca706aa6bc6a26d6f53f0115a5315542.jpg@464w_644h_1e_1c" alt="Card image cap" />
                 <div class="card-body">
                     <h5 class="card-title text-center" th:text="${movie.name}">超时空同居</h5>

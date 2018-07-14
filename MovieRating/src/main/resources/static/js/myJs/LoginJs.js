@@ -1,7 +1,25 @@
 $(function () {
 
     $("#personalCenterButton").click(function () {
-        window.location.href = getContextPath() + "/personalCenter";
+        console.log($("#personalCenterButton").text());
+        if($(this).text()!=="退出登录"){
+            window.location.href = getContextPath() + "/personalCenter";
+        }else{
+            $.ajax({
+                type: 'get',
+                url: getContextPath() + "/login/logout",
+                success: function (data) {
+                    if(data){
+                        window.location.href = getContextPath() + "/welcome";
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+
+        }
+
     });
     $(".loginButton").click(function () {
         var username = $("#usernameField").val();
