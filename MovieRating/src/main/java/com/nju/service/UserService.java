@@ -53,5 +53,12 @@ public interface UserService {
      */
     boolean writeComment(String userId, int mid, Comment comment);
 
-
+    /**
+     * 删除自己写的评论
+     *
+     * @param userId    用户id
+     * @param commentId 评论id
+     * @return
+     */
+    boolean deleteComment(String userId, int commentId);
 }

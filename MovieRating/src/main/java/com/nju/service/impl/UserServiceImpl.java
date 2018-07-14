@@ -154,6 +154,24 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public boolean deleteComment(String userId, int commentId) {
+
+        DoubanComment comment = doubanCommentDao.findByCommonId(commentId);
+
+        if (comment == null) {
+            return false;
+        }
+
+        if (userId == null || userId.equals("") || !userId.equals(comment.getUid())) {
+            return false;
+        }
+
+        doubanCommentDao.delete(comment);
+
+        return true;
+    }
+
     private void trans(DoubanComment douban, Comment comment) {
 
         comment.setUser(douban.getUid());

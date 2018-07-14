@@ -63,4 +63,6 @@ public class CommentServiceImpl implements CommentService {
         List<MTimeComment> mTimeComments = mTimeCommentDao.findAllByCommonId(movieId);
         return  XmlUtil.transMTime(mTimeComments);
     }
+
+
 }
