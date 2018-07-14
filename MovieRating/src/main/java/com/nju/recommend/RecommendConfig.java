@@ -1,9 +1,13 @@
 package com.nju.recommend;
 
+
 public interface RecommendConfig {
 
     // 相似矩阵存储的文件位置
     String SIMILARITY_FILE = "data/test/similarity.txt";
+    // 词向量模型的文件位置
+    String MODEL_FILE_NAME =  "data/test/hanlp-wiki-vec-zh.txt";
+
 
     // 基于内容和基于物品的协同过滤
     // 两种相似度算法的占比大小
@@ -14,7 +18,4 @@ public interface RecommendConfig {
      int RECOMMEND_SIZE = 5;
      // 热门电影的数量
      int HOT_SIZE = 5;
-
-
-
 }

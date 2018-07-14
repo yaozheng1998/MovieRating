@@ -2,6 +2,7 @@ package com.nju.recommend;
 
 import com.hankcs.hanlp.mining.word2vec.DocVectorModel;
 import com.hankcs.hanlp.mining.word2vec.WordVectorModel;
+import org.springframework.util.ResourceUtils;
 
 import java.io.IOException;
 
@@ -10,15 +11,13 @@ import java.io.IOException;
  */
 public class WordModelFactory {
 
-    private static final String MODEL_FILE_NAME = "data/test/hanlp-wiki-vec-zh.txt";
-
     private static WordVectorModel wordVectorModel;
     private static DocVectorModel docVectorModel;
 
     public static synchronized WordVectorModel getWordModel() {
         if (wordVectorModel == null) {
             try {
-                wordVectorModel = new WordVectorModel(MODEL_FILE_NAME);
+                wordVectorModel = new WordVectorModel(RecommendConfig.MODEL_FILE_NAME);
                 return wordVectorModel;
             } catch (IOException e) {
                 e.printStackTrace();
@@ -31,7 +30,7 @@ public class WordModelFactory {
         if (docVectorModel == null) {
             if (wordVectorModel == null) {
                 try {
-                    wordVectorModel = new WordVectorModel(MODEL_FILE_NAME);
+                    wordVectorModel = new WordVectorModel(RecommendConfig.MODEL_FILE_NAME);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
