@@ -18,5 +18,5 @@ public interface DoubanCommentDao extends JpaRepository<DoubanComment, Integer> 
 
     List<DoubanComment> findByName(String username);
 
-    DoubanComment findByCommonId(int commentId);
+    DoubanComment findById(int commentId);
 }

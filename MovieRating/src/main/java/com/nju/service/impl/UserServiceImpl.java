@@ -157,7 +157,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteComment(String userId, int commentId) {
 
-        DoubanComment comment = doubanCommentDao.findByCommonId(commentId);
+        DoubanComment comment = doubanCommentDao.findById(commentId);
 
         if (comment == null) {
             return false;
