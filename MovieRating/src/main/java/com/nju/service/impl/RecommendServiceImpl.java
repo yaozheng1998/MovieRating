@@ -42,7 +42,7 @@ public class RecommendServiceImpl implements RecommendService {
         String likeAll = (StringUtil.isEmpty(user.getLikes()) ? "" : user.getLikes()) + ","
                 + (StringUtil.isEmpty(user.getCollected()) ? "" : user.getCollected());
 
-        // 推荐热门 喜欢的人数最多的电影
+        // PART 1 推荐热门 喜欢的人数最多的电影
         if (StringUtil.isEmpty(likeAll)) {
             List<HotMovie> hotMovies = hotMovieDao.findAll();
             List<Integer> ids = new ArrayList<>();
@@ -52,7 +52,7 @@ public class RecommendServiceImpl implements RecommendService {
             return movieDao.findAllById(ids);
         }
 
-        // 个性化推荐
+        // PART 2 个性化推荐
         if (similarityMatrix == null) {
             similarityMatrix = similarityCalculation.getSimilarityMatrix();
         }
@@ -67,7 +67,7 @@ public class RecommendServiceImpl implements RecommendService {
         // 二维数组 保存电影id 和 对应的权重
         double[][] movieIdToWeight = new double[movies.size()][2];
         for (int i = 0; i<movieIdToWeight.length; ++i) {
-            movieIdToWeight[i][0] = i+1;
+            movieIdToWeight[i][0] = i;
             movieIdToWeight[i][1] = 0;
         }
 
@@ -76,7 +76,7 @@ public class RecommendServiceImpl implements RecommendService {
             int id = doubanId2Id.getOrDefault(aLikeDoubanId, -1);
             if (id == -1) continue;
             for (int i = 0; i < similarityMatrix[0].length; ++i) {
-                if (i == id) continue;  // 排除自身
+                if (i == id-1) continue;  // 排除自身
                 movieIdToWeight[i][1] = Math.max(movieIdToWeight[i][1], similarityMatrix[id-1][i]);
             }
         }
