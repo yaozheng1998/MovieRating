@@ -38,7 +38,18 @@ public class UserServiceImpl implements UserService {
     public List<Movie> getLikeMovies(String userId) {
 
         User user = userDao.findByUserId(userId);
-        String[] likes = user.getLikes().split(",");
+
+        if (user == null) {
+            return null;
+        }
+
+        String like = user.getLikes();
+
+        if (like == null || like.equals("")) {
+            return null;
+        }
+
+        String[] likes = like.split(",");
         List<Integer> movieId = new ArrayList<>();
         for (int i = 0; i < likes.length; i++) {
             movieId.add(Integer.parseInt(likes[i]));
