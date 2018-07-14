@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Transactional
@@ -43,18 +40,22 @@ public class UserServiceImpl implements UserService {
             return new ArrayList<>();
         }
 
-        String like = user.getLikes();
+        String like = user.getCollected();
 
         if (like == null || like.equals("")) {
             return new ArrayList<>();
         }
 
         String[] likes = like.split(",");
-        List<Integer> movieId = new ArrayList<>();
+        List<Movie> movies = new ArrayList<>();
         for (int i = 0; i < likes.length; i++) {
-            movieId.add(Integer.parseInt(likes[i]));
+            Movie movie = movieDao.findByDoubanId(Integer.valueOf(likes[i]));
+            if (movie != null) {
+                movies.add(movieDao.findByDoubanId(Integer.valueOf(likes[i])));
+            } else {
+                System.out.println(likes[i]);
+            }
         }
-        List<Movie> movies = movieDao.findAllByDoubanId(movieId);
 
         return movies;
     }
@@ -104,11 +105,19 @@ public class UserServiceImpl implements UserService {
         if (collected == null || collected.equals("")) {
             collected = movieId;
         } else {
-            int idx = collected.indexOf(movieId);
-            if (idx >= 0) {
-                collected = collected.substring(0, idx) + collected.substring(idx + movieId.length() + 1, collected.length() - 1);
+            String[] coll = collected.split(",");
+            List<String> temp = Arrays.asList(coll);
+
+            List collects = new ArrayList(temp);
+
+            if (collects.contains(movieId)) {
+                collects.remove(movieId);
             } else {
-                collected += "," + movieId;
+                collects.add(movieId);
+            }
+            collected = "";
+            for (int i = 0; i < collects.size(); i++) {
+                collected += collects.get(i) + ",";
             }
         }
 
