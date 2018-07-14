@@ -125,6 +125,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean writeComment(String userId, int mid, Comment comment) {
         User user = userDao.findByUserId(userId);
+        if (user==null){
+            return false;
+        }
         DoubanComment doubanComment = new DoubanComment();
         doubanComment.setDoubanId(mid);
         doubanComment.setUid(user.getUserId());
