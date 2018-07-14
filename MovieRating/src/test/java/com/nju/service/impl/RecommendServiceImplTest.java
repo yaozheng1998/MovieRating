@@ -22,7 +22,7 @@ public class RecommendServiceImplTest {
 
     @Test
     public void getRecommendedMovies() throws Exception {
-        List<Movie> movies = recommendService.getRecommendedMovies("tjz230");
+        List<Movie> movies = recommendService.getRecommendedMovies("xzfd");
         for (Movie movie : movies) {
             System.out.println(movie.getName());
         }
