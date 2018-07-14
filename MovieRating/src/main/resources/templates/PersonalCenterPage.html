@@ -3,18 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <title>个人中心</title>
-    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <!--<link rel="stylesheet" href="../../css/bootstrap.css">-->
     <link rel="stylesheet" th:href="@{/css/bootstrap-4.0.0/dist/css/bootstrap.min.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/customCSS/commonCSS.css}" type="text/css"/>
     <link rel="stylesheet" th:href="@{/css/customCSS/LoginModalCSS.css}" type="text/css"/>
     <style type="text/css">
         /*导航栏样式*/
         /*#searchButton{*/
-            /*margin-right: 20px;*/
+        /*margin-right: 20px;*/
         /*}*/
 
 
+        .navbar-brand,.nav-link{
+            cursor: pointer;
+        }
+        /*分割线样式*/
+        .hr{
+            height:2px;
+            margin:10px 0 10px 0;
+            background:rgba(232,232,232,.9);
+        }
+        .footer{
+            font-weight: 500;
+            color: rgba(0,0,0,.5);
+            margin-bottom: 2rem;
+        }
+        .footer h6{
+            margin: 0 0 -0.2rem 0;
+        }
+        .footer h6, .footer span{
+            font-size: .75rem;
+        }
+        .footer #projectInfoBlock{
+            padding: 0 0 0 2rem;
+        }
+        .footer #projectInfoBlock, .footer #aboutUsBlock{
+            margin-top: 1rem;
+        }
+        /*.footer #aboutUsBlock{*/
 
+        /*}*/
+        .footer img{
+            width: 30px;
+        }
+        .footer a{
+            color: rgba(0,0,0,.5);
+        }
+        .disappear{
+            display: none;
+        }
+
+        /*导航栏样式*/
+        #searchButton{
+            margin-right: 20px;
+        }
+
+
+
+
+
+
+        body{
+            padding-top: 50px;
+        }
+        .pcMainBlock{
+            border-left: 2px solid rgba(232,232,232,.9);
+            border-right: 2px solid rgba(232,232,232,.9);
+        }
+
+        .blockBorder{
+            margin: 20px 5px 0 5px;
+            border: 1px solid #f3f3f3;
+            border-radius: 2px;
+            padding: 30px 0 15px 18px;
+        }
+
+        #userID{
+            margin-top: 15px;
+        }
+        .card-body img{
+            cursor: pointer;
+        }
+        .card-row{
+            margin: 0 18px;
+        }
+
+
+
+
+
+        /*评论区*/
+        .commentArea{
+            margin: 1rem 0 0 0.8rem;
+            border: 1px solid #f3f3f3;
+            border-radius: 2px;
+            padding: 1rem;
+        }
+        .commentArea img{
+            width:35px;
+        }
+        .downEffect{
+            padding-top: 0.5rem;
+        }
+        .nameEffect{
+            margin-left: -2rem;
+        }
+        .nameEffect .commentUsername, .nameEffect .commentDate{
+            font-weight: 500;
+        }
+        .nameEffect .commentDate{
+            color: rgba(0,0,0,.5);
+        }
+        .myCommentBlockBorder{
+            margin: 0 5px 0 5px;
+            border: 1px solid #f3f3f3;
+            border-radius: 2px;
+            padding: 30px 0 15px 18px;
+        }
     </style>
 </head>
 <body>
@@ -42,9 +147,133 @@
             <!--<button class="btn btn-outline-success my-2 my-sm-0" type="button" id="loginModalButton" data-target="#loginModal" data-toggle="modal">登录</button>-->
             <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="personalCenterButton">退出登录</button>
         </form>
-
     </div>
 </nav>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 offset-1 pcMainBlock">
+            <div class="row" style="padding: 20px 0 0 40px">
+                <div class="col-md-1">
+                    <img src="../../images/17785150.jpeg" style="width: 60px;">
+                </div>
+                <div class="col-md-2 ">
+                    <h4 id="userID">xxxxxxxxxxxxxxxxxx</h4></div>
+            </div>
+            <div class="hr"></div>
+            <!--推荐的电影-->
+            <div class="row">
+                <ul class="nav nav-pills" role="tablist" id="requestTab" style="margin-left: 40px">
+                    <li role="presentation" class="nav-item"><a id="recFilmsLink" aria-controls="waited" role="tab" data-toggle="tab" class="active nav-link">推荐电影</a></li>
+                    <li role="presentation" class="nav-item"><a id="likesFilmsLink" aria-controls="ing" role="tab" data-toggle="tab" class="nav-link">我收藏的电影</a></li>
+                    <li role="presentation" class="nav-item"><a id="myCommentsLink" aria-controls="finished" role="tab" data-toggle="tab" class="nav-link">我的评论</a></li>
+                </ul>
+                <div class="col-md-12">
+                    <div class="row blockBorder" id="recFilms">
+                        <div class="col-md-12">
+                            <h4>推荐电影</h4>
+                            <div class="hr"></div>
+                        </div>
+                        <div class=" card-row" th:each="movie : ${recommendedMovieList}">
+                            <div class="card" style="width: 160px;" >
+                                <img class="card-img-top"  th:src="${movie.image}" alt="Card image cap" />
+                                <div class="card-body text-center">
+                                    <h5 class="card-title text-center" th:text="${movie.name}">超时空同居</h5>
+                                    <p class="card-text text-center" th:text="${movie.rating}">8.6</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row  blockBorder" id="likesFilms">
+                        <div class="col-md-12">
+                            <h4>我收藏的电影</h4>
+                            <div class="hr"></div>
+                        </div>
+                        <div class=" card-row" >
+                            <div class=" card-row" th:each="movie : ${likeMovieList}">
+                                <div class="card" style="width: 160px;" th:id="${movie.id}">
+                                    <img class="card-img-top"  th:src="${movie.image}" alt="Card image cap" />
+                                    <div class="card-body text-center">
+                                        <h5 class="card-title text-center" th:text="${movie.name}">超时空同居</h5>
+                                        <p class="card-text text-center" th:text="${movie.rating}">8.6</p>
+                                        <img src="../../images/like.png" th:id="${movie.id}" style="width: 30px;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row blockBorder" id="myComments">
+                        <div class="col-md-12">
+                            <h4>我的评论</h4>
+                            <div class="hr"></div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row" >
+                                <div class="col-md-2">
+                                    <div class="">
+                                        <div class="card" style="width: 160px;" >
+                                            <img class="card-img-top"  src="http://p0.meituan.net/movie/f193e43ca706aa6bc6a26d6f53f0115a5315542.jpg@464w_644h_1e_1c" alt="Card image cap" />
+                                            <div class="card-body text-center">
+                                                <h5 class="card-title text-center">超时空同居</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="row myCommentBlockBorder">
+                                        <!--要显示的内容：评论时间、评论内容-->
+                                        <div class="col-md-12 text-left">
+                                            <span>无论片中的陆鸣怎么选，小焦都会过上衣食无忧的生活，她要么会有一个家财万贯的亲爹，要么会有一个亿万资产的“干爹”（结合片中两人的实际年龄和事实情况，大概就是这个意思吧）</span>
+                                        </div>
+                                        <div class="col-md-12 hr"></div>
+                                        <div class="col-md-10 text-right" style="margin-top: 8px;">
+                                            2018-9-08
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-primary">删除评论</button>
+                                        </div>
+                                    </div>
+                                    <div class="row myCommentBlockBorder">
+                                        <!--要显示的内容：评论时间、评论内容-->
+                                        <div class="col-md-12 text-left">
+                                            <span>无论片中的陆鸣怎么选，小焦都会过上衣食无忧的生活，她要么会有一个家财万贯的亲爹，要么会有一个亿万资产的“干爹”（结合片中两人的实际年龄和事实情况，大概就是这个意思吧）</span>
+                                        </div>
+                                        <div class="col-md-12 hr"></div>
+                                        <div class="col-md-10 text-right" style="margin-top: 8px;">
+                                            2018-9-08
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-primary">删除评论</button>
+                                        </div>
+                                    </div>
+                                    <div class="row myCommentBlockBorder">
+                                        <!--要显示的内容：评论时间、评论内容-->
+                                        <div class="col-md-12 text-left">
+                                            <span>无论片中的陆鸣怎么选，小焦都会过上衣食无忧的生活，她要么会有一个家财万贯的亲爹，要么会有一个亿万资产的“干爹”（结合片中两人的实际年龄和事实情况，大概就是这个意思吧）</span>
+                                        </div>
+                                        <div class="col-md-12 hr"></div>
+                                        <div class="col-md-10 text-right" style="margin-top: 8px;">
+                                            2018-9-08
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-primary">删除评论</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="hr"></div>
+        </div>
+    </div>
+</div>
 </body>
 <script th:src="@{/js/jQuery/jquery-3.2.1.min.js}"></script>
 <!--<script th:src="@{/css/bootstrap-4.0.0/assets/js/vendor/popper.min.js}"></script>-->

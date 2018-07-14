@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.SimpleFormatter;
 
 @Controller
 @RequestMapping(value = "/detail")
@@ -32,7 +33,7 @@ public class DetailPageController {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String visit(Model model, @RequestParam("id")int id){
+    public String visit(Model model, @RequestParam("id")int id, HttpSession httpSession){
 //        填充数据
         Movie movie = movieService.loadMovie(id);
         List<Movie> topTenMovies = movieService.loadTopTenMovies();
@@ -47,6 +48,8 @@ public class DetailPageController {
         model.addAttribute("boubanCommentList", boubanCommentList);
         model.addAttribute("maoyanCommentList", maoyanCommentList);
         model.addAttribute("mTimeCommentList", mTimeCommentList);
+
+        model.addAttribute("isOnline", httpSession.getAttribute("userID") != null);
         return "DetailPage";
     }
 
@@ -78,26 +81,69 @@ public class DetailPageController {
      * @param mid 电影id
      * @param httpSession 获取用户名
      */
-    @RequestMapping(value = "submitComment", method = RequestMethod.POST)
+    @RequestMapping(value = "/submitComment", method = RequestMethod.POST)
     @ResponseBody
     public boolean submitComment(@RequestParam("content")String content,
                                  @RequestParam("rate")double rate,
                                  @RequestParam("mid")int mid,
                                  HttpSession httpSession){
-        String username = (String)httpSession.getAttribute("username");    // 用户名
-        if(username == null){
+        String userID = (String)httpSession.getAttribute("userID");    // 用户名
+        if(userID == null){
             return false;
         }else{
             String from = "MovieRating";
-            User user = userService.getUserData(username);
+            User user = userService.getUserData(userID);
             String avatar = user.getAvatar();      // 用户头像
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String date = formatter.format(new Date());// 评论时间
             int thumb = 0;      // 点赞数
-            Comment comment = new Comment(from,username,avatar,date,content,thumb,rate);
-            boolean result = userService.writeComment(username, mid, comment);
+            Comment comment = new Comment(from,userID,avatar,date,content,thumb,rate);
+            System.out.println("submitComment");
+            boolean result = userService.writeComment(userID, mid, comment);
             return result;
         }
     }
+
+    /**
+     * 收藏或者取消收藏这个电影
+     * @param mid
+     * @param httpSession
+     * @return
+     */
+    @RequestMapping(value = "/likeTheMovie", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean likeTheMovie(@RequestParam("mid")int mid, HttpSession httpSession){
+        String userID = (String) httpSession.getAttribute("userID");
+        if(userID == null){
+            return false;
+        }else{
+            userService.likeOrUnlike(userID, mid);
+            return true;
+        }
+
+    }
+
+    /**
+     * 当用户进入详情界面，如果是以登录的状态跳转，就要查看该电影是否已经收藏过
+     * @param mid
+     * @param httpSession
+     * @return
+     */
+    @RequestMapping(value = "/movieLikedOrNot", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean movieLikedOrNot(@RequestParam("mid")int mid, HttpSession httpSession){
+        String userID = (String) httpSession.getAttribute("userID");
+        System.out.println("mid: "+ mid);
+        List<Movie> movieList = userService.getLikeMovies(userID);
+        Movie movie = movieService.loadMovie(mid);
+
+        if(movieList.contains(movie)){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
 
 }

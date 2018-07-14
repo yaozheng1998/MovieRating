@@ -15,10 +15,14 @@
         #downArea{
             padding-top: 5rem;
         }
-        #downArea img{
+        #downArea #movieImg{
             width: 232px;
             margin-left: 4.5rem;
             -moz-box-shadow:0px 5px 17px #A8A8A8; -webkit-box-shadow:0px 5px 17px #A8A8A8; box-shadow:0px 5px 17px #A8A8A8;
+        }
+        #downArea #dislikeBtn, #downArea #likeBtn{
+            cursor: pointer;
+            margin: 1rem 0 0 5rem;
         }
         #titleBlock{
             padding-left: 2rem;
@@ -163,8 +167,8 @@
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" placeholder="Search" id="searchInput" autocomplete="off">
             <button class="btn btn-outline-info my-2 my-sm-0" type="button" id="searchButton">搜索</button>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="loginModalButton" data-target="#loginModal" data-toggle="modal">登录</button>
-            <button class="btn btn-outline-success my-2 my-sm-0 disappear" type="button" id="personalCenterButton">个人中心</button>
+            <button th:class="${isOnline}?'btn btn-outline-success my-2 my-sm-0 disappear':'btn btn-outline-success my-2 my-sm-0'" type="button" id="loginModalButton" data-target="#loginModal" data-toggle="modal">登录</button>
+            <button th:class="${isOnline}?'btn btn-outline-success my-2 my-sm-0':'btn btn-outline-success my-2 my-sm-0 disappear'" type="button" id="personalCenterButton">个人中心</button>
         </form>
     </div>
 </nav>
@@ -175,12 +179,15 @@
     </div>
     <!--模糊图上面的文字部分-->
     <div class="row" id="downArea">
-        <div class="col-md-3">
-            <img class="rounded" th:src="${movie.image}" alt/>
+        <div class="col-md-3 text-center">
+            <img id="movieImg" class="rounded" th:src="${movie.image}" alt/>
+            <br>
+            <img th:src="@{/images/dislike.png}" style="width: 50px;" id="dislikeBtn">
+            <img th:src="@{/images/likeBtn.png}" style="width: 50px;" id="likeBtn" class="disappear">
         </div>
         <div class="col-md-7" id="titleBlock">
             <!--要放置的条目：影片名、英文名、类型、国家/地区、时长、上映时间、导演、编剧、主演、-->
-            <h3 th:text="${movie.name}"></h3>
+            <h3 class="movieName" th:id="${movie.id}" th:text="${movie.name}"></h3>
             <h5 th:text="${movie.byname}"></h5>
             <h6 th:text="${movie.genres}"></h6>
             <h6 th:text="${movie.countries}"></h6>
@@ -250,6 +257,33 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-12 commentArea">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form>
+                                    <div class="form-group">
+                                        <!--<label for="exampleFormControlTextarea1">撰写评论</label>-->
+                                        <textarea class="form-control" id="commentTextarea" rows="3" placeholder="撰写我的评论"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6">
+                                <form class="form-inline">
+                                    <div class="form-group row">
+                                        <label for="rateField" class="col-sm-6 col-form-label">填写评分</label>
+                                        <div class="col-sm-6">
+                                            <input type="number" class="form-control" id="rateField" value="0" min="0" max="10" step="0.1">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <button type="button" class="btn btn-primary" id="submitCommentBtn">提交评论</button>
+                            </div>
+
+                        </div>
+                    </div>
+
                     <div class="col-md-12 commentArea">
                         <div id="allComment">
                             <div class="row commentBlock" th:each="comment,commentStat : ${commentsList}">

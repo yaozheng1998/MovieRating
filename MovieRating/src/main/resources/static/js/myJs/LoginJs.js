@@ -6,10 +6,14 @@ $(function () {
     $(".loginButton").click(function () {
         var username = $("#usernameField").val();
         var password = $("#passwordField").val();
+        var user = {};
+        user.userID = username;
+        user.password = password;
         if(username !== "" && password !== ""){
             $.ajax({
                 type: 'post',
-                url: getContextPath() + "/login?username=" + username + "&password=" + password,
+                url: getContextPath() + "/login",
+                data: user,
                 success: function (data) {
                     if(data){
                         console.log("登录成功！");

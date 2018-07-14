@@ -18,13 +18,26 @@ public class LoginController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public boolean visit(@RequestParam("username")String username, @RequestParam("password")String password, HttpSession httpSession){
-        boolean result = loginService.login(username, password);
+    public boolean visit(@RequestParam("userID")String userID, @RequestParam("password")String password, HttpSession httpSession){
+        boolean result = loginService.login(userID, password);
         if(result){
-            httpSession.setAttribute("username", username);
+            httpSession.setAttribute("userID", userID);
             return true;
         }else{
             return false;
         }
     }
+
+    /**
+     * 验证是否当前账号处于登录状态
+     * 如果有账户在线，返回true
+     * @param httpSession
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET,value = "/testOnlineState")
+    @ResponseBody
+    public boolean isOnline(HttpSession httpSession){
+        return httpSession.getAttribute("userID") != null;
+    }
+
 }
