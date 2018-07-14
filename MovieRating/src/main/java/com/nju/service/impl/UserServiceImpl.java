@@ -40,13 +40,13 @@ public class UserServiceImpl implements UserService {
         User user = userDao.findByUserId(userId);
 
         if (user == null) {
-            return null;
+            return new ArrayList<>();
         }
 
         String like = user.getLikes();
 
         if (like == null || like.equals("")) {
-            return null;
+            return new ArrayList<>();
         }
 
         String[] likes = like.split(",");
@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService {
         String collected = user.getCollected();
         String movieId = mid + "";
 
-        if (collected == null) {
+        if (collected == null || collected.equals("")) {
             collected = movieId;
         } else {
             int idx = collected.indexOf(movieId);
@@ -125,7 +125,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean writeComment(String userId, int mid, Comment comment) {
         User user = userDao.findByUserId(userId);
-        if (user==null){
+        if (user == null) {
             return false;
         }
         DoubanComment doubanComment = new DoubanComment();
