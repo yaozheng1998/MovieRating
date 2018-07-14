@@ -45,7 +45,7 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie loadMovie(int id) {
-        return movieDao.getOne(id);
+        return movieDao.findByDoubanId(id);
     }
 
 }

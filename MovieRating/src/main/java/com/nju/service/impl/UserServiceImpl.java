@@ -36,28 +36,64 @@ public class UserServiceImpl implements UserService {
 
         User user = userDao.findByUserId(userId);
 
-        if (user == null) {
+        if (user == null ||  user.getCollected() == null ||  user.getCollected().isEmpty()) {
             return new ArrayList<>();
         }
 
         String like = user.getCollected();
-
-        if (like == null || like.equals("")) {
-            return new ArrayList<>();
-        }
 
         String[] likes = like.split(",");
         List<Movie> movies = new ArrayList<>();
         for (int i = 0; i < likes.length; i++) {
             Movie movie = movieDao.findByDoubanId(Integer.valueOf(likes[i]));
             if (movie != null) {
-                movies.add(movieDao.findByDoubanId(Integer.valueOf(likes[i])));
+                movies.add(movie);
             } else {
                 System.out.println(likes[i]);
             }
         }
 
         return movies;
+    }
+
+    @Override
+    public boolean likeOrUnlike(String userId, int mid) {
+
+        User user = userDao.findByUserId(userId);
+        if (user == null) return false;
+
+        String collected = user.getCollected();
+        String movieId = mid + "";
+
+        if (collected == null || collected.isEmpty()) {
+            user.setCollected(movieId);
+        } else {
+            String[] coll = collected.split(",");
+            List<String> collects = Arrays.asList(coll);
+
+            if (collects.contains(movieId)) {
+                collects.remove(movieId);
+            } else {
+                collects.add(movieId);
+            }
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < collects.size(); i++) {
+                if (i == 0) {
+                    builder.append(collects.get(i));
+                } else {
+                    builder.append(",").append(collects.get(i));
+                }
+            }
+            user.setCollected(builder.toString());
+        }
+
+        try {
+            userDao.save(user);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+
     }
 
     @Override
@@ -91,47 +127,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean likeOrUnlike(String userId, int mid) {
-
-        User user = userDao.findByUserId(userId);
-
-        if (user == null) {
-            return false;
-        }
-
-        String collected = user.getCollected();
-        String movieId = mid + "";
-
-        if (collected == null || collected.equals("")) {
-            collected = movieId;
-        } else {
-            String[] coll = collected.split(",");
-            List<String> temp = Arrays.asList(coll);
-
-            List collects = new ArrayList(temp);
-
-            if (collects.contains(movieId)) {
-                collects.remove(movieId);
-            } else {
-                collects.add(movieId);
-            }
-            collected = "";
-            for (int i = 0; i < collects.size(); i++) {
-                collected += collects.get(i) + ",";
-            }
-        }
-
-        user.setCollected(collected);
-        try {
-            userDao.save(user);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-
-    }
-
-    @Override
     public boolean writeComment(String userId, int mid, Comment comment) {
         User user = userDao.findByUserId(userId);
         if (user == null) {
@@ -156,30 +151,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean deleteComment(String userId, int commentId) {
-
+        if (userId == null || userId.isEmpty()) return false;
         DoubanComment comment = doubanCommentDao.findById(commentId);
-
-        if (comment == null) {
-            return false;
-        }
-
-        if (userId == null || userId.equals("") || !userId.equals(comment.getUid())) {
-            return false;
-        }
-
+        if (comment == null || !userId.equals(comment.getUid())) return false;
         doubanCommentDao.delete(comment);
-
         return true;
     }
 
     private void trans(DoubanComment douban, Comment comment) {
-
         comment.setUser(douban.getUid());
         comment.setAvatar(douban.getAvatar());
         comment.setDate(douban.getCreate_at());
         comment.setContent(douban.getContent());
         comment.setThumb(0);
         comment.setRate(douban.getRating());
-
     }
 }
