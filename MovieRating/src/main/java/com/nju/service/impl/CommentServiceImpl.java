@@ -26,7 +26,10 @@ public class CommentServiceImpl implements CommentService {
     private MovieDao movieDao;
 
     @Autowired
-    public CommentServiceImpl(DoubanCommentDao doubanCommentDao, MaoYanCommentDao maoYanCommentDao, MTimeCommentDao mTimeCommentDao, MovieDao movieDao) {
+    public CommentServiceImpl(DoubanCommentDao doubanCommentDao,
+                              MaoYanCommentDao maoYanCommentDao,
+                              MTimeCommentDao mTimeCommentDao,
+                              MovieDao movieDao) {
         this.doubanCommentDao = doubanCommentDao;
         this.maoYanCommentDao = maoYanCommentDao;
         this.mTimeCommentDao = mTimeCommentDao;
@@ -36,12 +39,12 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<Comment> loadAllComments(int movieId) {
 
-        Movie movie = movieDao.getOne(movieId);
-        int doubanMovieId = movie.getDoubanId();
+        Movie movie = movieDao.findByDoubanId(movieId);
+        int id = movie.getId();
 
-        List<Comment> doubanComment = loadCommentsFromDouban(doubanMovieId);
-        List<Comment> maoyanComment = loadCommentsFromMaoyan(doubanMovieId);
-        List<Comment> mtimeComment = loadCommentsFromTime(doubanMovieId);
+        List<Comment> doubanComment = loadCommentsFromDouban(id);
+        List<Comment> maoyanComment = loadCommentsFromMaoyan(id);
+        List<Comment> mtimeComment = loadCommentsFromTime(id);
 
         mtimeComment.addAll(maoyanComment);
         mtimeComment.addAll(doubanComment);
