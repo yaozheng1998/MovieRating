@@ -28,6 +28,8 @@ $(function () {
         user.userID = username;
         user.password = password;
         if(username !== "" && password !== ""){
+            console.log(username);
+            console.log(password);
             $.ajax({
                 type: 'post',
                 url: getContextPath() + "/login",
@@ -38,7 +40,7 @@ $(function () {
                         $("#loginModalButton").addClass("disappear");
                         $("#personalCenterButton").removeClass("disappear");
                         $("#loginModal").modal("hide");
-                        window.location.reload();
+                        // window.location.reload();
                     }else{
                         window.alert("用户名或密码错误!");
                     }

@@ -21,7 +21,7 @@ public class LoginController {
     public boolean visit(@RequestParam("userID")String userID, @RequestParam("password")String password, HttpSession httpSession){
         boolean result = loginService.login(userID, password);
         if(result){
-            httpSession.setAttribute("userID", userID);
+            httpSession.setAttribute("userId", userID);
             return true;
         }else{
             return false;
@@ -37,7 +37,7 @@ public class LoginController {
     @RequestMapping(method = RequestMethod.GET,value = "/testOnlineState")
     @ResponseBody
     public boolean isOnline(HttpSession httpSession){
-        return httpSession.getAttribute("userID") != null;
+        return httpSession.getAttribute("userId") != null;
     }
 
 

@@ -49,7 +49,7 @@ public class DetailPageController {
         model.addAttribute("maoyanCommentList", maoyanCommentList);
         model.addAttribute("mTimeCommentList", mTimeCommentList);
 
-        model.addAttribute("isOnline", httpSession.getAttribute("userID") != null);
+        model.addAttribute("isOnline", httpSession.getAttribute("userId") != null);
         return "DetailPage";
     }
 
@@ -68,7 +68,7 @@ public class DetailPageController {
                                  @RequestParam("rate")double rate,
                                  @RequestParam("mid")int mid,
                                  HttpSession httpSession){
-        String userID = (String)httpSession.getAttribute("userID");    // 用户名
+        String userID = (String)httpSession.getAttribute("userId");    // 用户名
         if(userID == null){
             return false;
         }else{
@@ -94,7 +94,7 @@ public class DetailPageController {
     @RequestMapping(value = "/likeTheMovie", method = RequestMethod.POST)
     @ResponseBody
     public boolean likeTheMovie(@RequestParam("mid")int mid, HttpSession httpSession){
-        String userID = (String) httpSession.getAttribute("userID");
+        String userID = (String) httpSession.getAttribute("userId");
         if(userID == null){
             return false;
         }else{
@@ -113,7 +113,7 @@ public class DetailPageController {
     @RequestMapping(value = "/movieLikedOrNot", method = RequestMethod.POST)
     @ResponseBody
     public boolean movieLikedOrNot(@RequestParam("mid")int mid, HttpSession httpSession){
-        String userID = (String) httpSession.getAttribute("userID");
+        String userID = (String) httpSession.getAttribute("userId");
 //        System.out.println("mid: "+ mid);
         List<Movie> movieList = userService.getLikeMovies(userID);
 
@@ -140,7 +140,7 @@ public class DetailPageController {
     @ResponseBody
     public boolean deleteComment(@RequestParam("commentId")int commentId,
                                  HttpSession httpSession){
-        String userID = (String)httpSession.getAttribute("userID");    // 用户名
+        String userID = (String)httpSession.getAttribute("userId");    // 用户名
         return userService.deleteComment(userID, commentId);
     }
 

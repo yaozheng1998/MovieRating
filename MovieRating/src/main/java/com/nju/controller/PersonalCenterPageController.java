@@ -28,7 +28,7 @@ public class PersonalCenterPageController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String visit(Model model,HttpSession httpSession){
-        String userID = (String) httpSession.getAttribute("userID");
+        String userID = (String) httpSession.getAttribute("userId");
         User user = userService.getUserData(userID);
 //        填充用户数据：用户头像、用户名
         //获取推荐给用户的电影，按相关性排序

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -19,10 +20,11 @@ public class SearchPageController {
     private MovieService movieService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String visit(Model model, @RequestParam("keyword")String keyword){
+    public String visit(Model model, @RequestParam("keyword")String keyword, HttpSession httpSession){
 //        填充数据
         List<Movie> searchMovie = movieService.searchMovie(keyword);
         model.addAttribute("searchResults", searchMovie);
+        model.addAttribute("isOnline", httpSession.getAttribute("userId") != null);
         return "SearchResultPage";
     }
 }

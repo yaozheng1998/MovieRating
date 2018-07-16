@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -19,10 +20,11 @@ public class WelcomePageController {
     private MovieService movieService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String visit(Model model){
+    public String visit(Model model, HttpSession httpSession){
 //        填充数据
         List<Movie> movieList = movieService.loadAllMovies();
         model.addAttribute("moviesList", movieList);
+        model.addAttribute("isOnline", httpSession.getAttribute("userId") != null);
         return "WelcomePage";
     }
 }
